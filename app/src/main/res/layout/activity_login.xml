@@ -22,8 +22,22 @@
         app:layout_constraintHeight_percent=".2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".3"
+        app:layout_constraintVertical_bias=".2"
         app:layout_constraintWidth_percent=".4" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/alegreya_black"
+        android:gravity="center"
+        android:text="Welcome To College Management"
+        android:textSize="30sp"
+        app:layout_constraintVertical_bias=".4"
+        app:layout_constraintBottom_toTopOf="@+id/google_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/google_login"
@@ -39,6 +53,7 @@
         app:icon="@drawable/googleg_standard_color_18"
         app:iconGravity="textStart"
         app:iconTint="@null"
+        app:layout_constraintVertical_bias=".8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
