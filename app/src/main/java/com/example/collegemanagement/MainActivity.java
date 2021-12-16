@@ -41,9 +41,43 @@ public class MainActivity extends AppCompatActivity {
         btnSignOut = findViewById(R.id.logout);
 
         signOut();
+        Button button=  findViewById(R.id.button);
+        Button button2= findViewById(R.id.button2);
+        Button button3= findViewById(R.id.button3);
+        Button button4= findViewById(R.id.button4);
 
-
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent pg1=new Intent(MainActivity.this, com.example.collegemanagement.QuestionPaper.class);
+                startActivity(pg1);
+            }
+        });
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent pg2=new Intent(MainActivity.this, Textbooks.class);
+                startActivity(pg2);
+            }
+        });
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent pg3=new Intent(MainActivity.this, VideoLectures.class);
+                startActivity(pg3);
+            }
+        });
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent pg4=new Intent(MainActivity.this, QuestionPaper.class);
+                startActivity(pg4);
+            }
+        });
     }
+
+
+
 
     private void signOut() {
         btnSignOut.setOnClickListener(new View.OnClickListener() {
