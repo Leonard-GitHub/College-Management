@@ -49,9 +49,11 @@ public class MainActivity extends AppCompatActivity {
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mGoogleSignInClient.signOut();
+                FirebaseAuth.getInstance().signOut();
                 Toast.makeText(MainActivity.this,"You are Logged Out",Toast.LENGTH_SHORT).show();
-                btnSignOut.setVisibility(View.INVISIBLE);
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -59,18 +61,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void updateUI(FirebaseUser fUser) {
-        btnSignOut.setVisibility(View.VISIBLE);
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
-        if (account != null) {
-            String personName = account.getDisplayName();
-            String personGivenName = account.getGivenName();
-            String personFamilyName = account.getFamilyName();
-            String personEmail = account.getEmail();
-            String personId = account.getId();
-            Uri personPhoto = account.getPhotoUrl();
 
-            Toast.makeText(MainActivity.this, personName + personEmail, Toast.LENGTH_SHORT).show();
-        }
-    }
+
 }

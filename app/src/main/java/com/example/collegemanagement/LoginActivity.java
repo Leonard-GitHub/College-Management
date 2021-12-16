@@ -54,13 +54,21 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user!=null){
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }else {
+            Glogin();
+        }
+    }
 
     private void Glogin() {
-
-        //Google Login
-
-
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -74,10 +82,8 @@ public class LoginActivity extends AppCompatActivity {
                 signIn();
             }
         });
-
-
-
     }
+
 
     private void signIn(){
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -99,6 +105,7 @@ public class LoginActivity extends AppCompatActivity {
             GoogleSignInAccount acc = completedTask.getResult(ApiException.class);
             Toast.makeText(LoginActivity.this,"Signed In Successfully",Toast.LENGTH_SHORT).show();
             FirebaseGoogleAuth(acc);
+
         }
         catch (ApiException e){
             Toast.makeText(LoginActivity.this,"Sign In Failed",Toast.LENGTH_SHORT).show();
@@ -116,10 +123,11 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Toast.makeText(LoginActivity.this, "Successful", Toast.LENGTH_SHORT).show();
                         FirebaseUser user = mAuth.getCurrentUser();
-                        updateUI(user);
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
                     } else {
                         Toast.makeText(LoginActivity.this, "Failed", Toast.LENGTH_SHORT).show();
-                        updateUI(null);
                     }
                 }
             });
@@ -131,9 +139,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void updateUI(FirebaseUser fUser){
-
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(intent);
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
         if(account !=  null){
             String personName = account.getDisplayName();
