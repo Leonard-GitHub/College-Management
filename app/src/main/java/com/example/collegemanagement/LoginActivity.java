@@ -131,7 +131,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void updateUI(FirebaseUser fUser){
-       // btnSignOut.setVisibility(View.VISIBLE);
+
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
         if(account !=  null){
             String personName = account.getDisplayName();
