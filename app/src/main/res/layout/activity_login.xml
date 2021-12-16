@@ -10,7 +10,7 @@
         android:id="@+id/view2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/blue_gradient_bg" />
+        />
 
     <ImageView
         android:id="@+id/imageView"
@@ -29,11 +29,11 @@
         android:id="@+id/google_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/google_login_btn"
         android:gravity="center"
-        android:text="Login With Gmail"
+        android:text="Login With Google"
         android:textColor="@color/black"
         app:backgroundTint="@null"
         app:icon="@drawable/googleg_standard_color_18"
