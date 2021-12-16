@@ -4,9 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -25,6 +28,9 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Button btnSignOut;
+    private GoogleSignInClient mGoogleSignInClient;
+
 
 
     @Override
@@ -32,8 +38,39 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        btnSignOut = findViewById(R.id.logout);
+
+        signOut();
+
 
     }
 
+    private void signOut() {
+        btnSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mGoogleSignInClient.signOut();
+                Toast.makeText(MainActivity.this,"You are Logged Out",Toast.LENGTH_SHORT).show();
+                btnSignOut.setVisibility(View.INVISIBLE);
+            }
+        });
+    }
 
+
+
+
+    private void updateUI(FirebaseUser fUser) {
+        btnSignOut.setVisibility(View.VISIBLE);
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+        if (account != null) {
+            String personName = account.getDisplayName();
+            String personGivenName = account.getGivenName();
+            String personFamilyName = account.getFamilyName();
+            String personEmail = account.getEmail();
+            String personId = account.getId();
+            Uri personPhoto = account.getPhotoUrl();
+
+            Toast.makeText(MainActivity.this, personName + personEmail, Toast.LENGTH_SHORT).show();
+        }
+    }
 }
