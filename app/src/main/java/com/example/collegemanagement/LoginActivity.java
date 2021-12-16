@@ -63,8 +63,6 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
-        }else {
-            Glogin();
         }
     }
 
@@ -103,12 +101,14 @@ public class LoginActivity extends AppCompatActivity {
         try{
 
             GoogleSignInAccount acc = completedTask.getResult(ApiException.class);
-            Toast.makeText(LoginActivity.this,"Signed In Successfully",Toast.LENGTH_SHORT).show();
+            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Signed In Successfully", Snackbar.LENGTH_LONG);
+            snackbar.show();
             FirebaseGoogleAuth(acc);
 
         }
         catch (ApiException e){
-            Toast.makeText(LoginActivity.this,"Sign In Failed",Toast.LENGTH_SHORT).show();
+            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Sign In Failed", Snackbar.LENGTH_LONG);
+            snackbar.show();
             FirebaseGoogleAuth(null);
         }
     }
@@ -121,7 +121,6 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Toast.makeText(LoginActivity.this, "Successful", Toast.LENGTH_SHORT).show();
                         FirebaseUser user = mAuth.getCurrentUser();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
