@@ -6,47 +6,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-  <Button
-      android:id="@+id/button"
-      android:layout_width="134dp"
-      android:layout_height="51dp"
-      android:layout_marginStart="37dp"
-      android:layout_marginTop="149dp"
-      android:layout_marginBottom="151dp"
-      android:text="Q-P"
-      app:layout_constraintBottom_toBottomOf="@+id/imageView7"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/imageView6" />
 
-  <ImageView
-      android:id="@+id/imageView4"
-      android:layout_width="0dp"
-      android:layout_height="82dp"
-      android:layout_marginStart="25dp"
-      android:layout_marginTop="33dp"
-      android:layout_marginEnd="3dp"
-      app:layout_constraintEnd_toStartOf="@+id/textView2"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:srcCompat="@drawable/claret" />
 
-  <TextView
-      android:id="@+id/textView2"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="49dp"
-      android:layout_marginEnd="24dp"
-      android:layout_marginBottom="344dp"
-      android:text="Claret College App"
-      android:textColor="#A51616"
-      android:textSize="34sp"
-      android:textStyle="bold"
-      app:layout_constraintBottom_toTopOf="@+id/imageView7"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toEndOf="@+id/imageView4"
-      app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="49dp"
+        android:layout_marginBottom="344dp"
+        android:text="Claret College App"
+        android:textColor="#A51616"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imageView7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-  <Button
+    <Button
+        android:id="@+id/button"
+        android:layout_width="134dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="149dp"
+        android:layout_marginBottom="151dp"
+        android:text="Q-P"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView6" />
+
+    <Button
       android:id="@+id/button2"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -74,21 +63,23 @@
       app:layout_constraintEnd_toEndOf="@+id/imageView8"
       app:layout_constraintTop_toTopOf="@+id/button3" />
 
-  <ImageView
-      android:id="@+id/imageView5"
-      android:layout_width="0dp"
-      android:layout_height="91dp"
-      android:layout_marginStart="10dp"
-      android:layout_marginTop="82dp"
-      android:layout_marginEnd="10dp"
-      android:layout_marginBottom="81dp"
-      app:layout_constraintBottom_toBottomOf="@+id/button"
-      app:layout_constraintEnd_toEndOf="@+id/button"
-      app:layout_constraintStart_toStartOf="@+id/button"
-      app:layout_constraintTop_toBottomOf="@+id/imageView4"
-      app:srcCompat="@drawable/exam" />
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="0dp"
+        android:layout_height="91dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="82dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="81dp"
+        app:layout_constraintBottom_toBottomOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.077"
+        app:srcCompat="@drawable/exam" />
 
-  <ImageView
+    <ImageView
       android:id="@+id/imageView6"
       android:layout_width="110dp"
       android:layout_height="119dp"
@@ -126,17 +117,14 @@
       app:layout_constraintTop_toTopOf="@+id/button2"
       app:srcCompat="@drawable/todo" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-  <Button
-      android:id="@+id/logout"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Logout"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="Logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
