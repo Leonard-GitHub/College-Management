@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent pg1=new Intent(MainActivity.this, com.example.collegemanagement.QuestionPaper.class);
+                Intent pg1=new Intent(MainActivity.this, QuestionPaper.class);
                 startActivity(pg1);
             }
         });
