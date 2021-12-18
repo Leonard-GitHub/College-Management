@@ -5,150 +5,159 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="#3F51B5"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/drawerlayout"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="49dp"
-        android:fontFamily="@font/adamina"
-        android:text="Claret College App"
-        android:textColor="#3F51B5"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="49dp"
+            android:fontFamily="@font/adamina"
+            android:text="Claret College App"
+            android:textColor="#3F51B5"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/book" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/exam__1_" />
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/book" />
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="#3F51B5"
-                android:text="Textbooks"
-                app:layout_constraintEnd_toEndOf="@+id/imageView5"
-                app:layout_constraintStart_toStartOf="@+id/imageView5"
-                app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/exam__1_" />
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="134dp"
-                android:layout_height="51dp"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="#3F51B5"
-                android:text="Q-P"
-                app:iconTint="#3F51B5"
-                app:layout_constraintEnd_toEndOf="@+id/imageView6"
-                app:layout_constraintStart_toStartOf="@+id/imageView6"
-                app:layout_constraintTop_toBottomOf="@+id/imageView6" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="Textbooks"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                    app:layout_constraintStart_toStartOf="@+id/imageView5"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
-    </LinearLayout>
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="134dp"
+                    android:layout_height="51dp"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="Q-P"
+                    app:iconTint="#3F51B5"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView6"
+                    app:layout_constraintStart_toStartOf="@+id/imageView6"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        </LinearLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="#3F51B5"
-                android:text="To-Do List"
-                app:layout_constraintEnd_toEndOf="@+id/imageView8"
-                app:layout_constraintStart_toStartOf="@+id/imageView8"
-                app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/elearning" />
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="To-Do List"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView8"
+                    app:layout_constraintStart_toStartOf="@+id/imageView8"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
-            <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="32dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/to_do_list" />
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/elearning" />
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="#3F51B5"
-                android:text="Video Lectures"
-                app:layout_constraintEnd_toEndOf="@+id/imageView7"
-                app:layout_constraintStart_toStartOf="@+id/imageView7"
-                app:layout_constraintTop_toBottomOf="@+id/imageView7" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="32dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/to_do_list" />
 
-    </LinearLayout>
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="#3F51B5"
+                    android:text="Video Lectures"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView7"
+                    app:layout_constraintStart_toStartOf="@+id/imageView7"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
 
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:backgroundTint="#3F51B5"
-        android:text="Logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:backgroundTint="#3F51B5"
+            android:text="Logout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

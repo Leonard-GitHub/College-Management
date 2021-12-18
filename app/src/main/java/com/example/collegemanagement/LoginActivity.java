@@ -43,8 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //to hide the action bar
-        getSupportActionBar().hide();
+
 
         googleloginbtn = findViewById(R.id.google_login);
         mAuth = FirebaseAuth.getInstance();
