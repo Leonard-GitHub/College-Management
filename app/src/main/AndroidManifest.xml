@@ -18,18 +18,6 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".QuestionPaper"
-            android:exported="false" />
-        <activity
-            android:name=".Textbooks"
-            android:exported="false" />
-        <activity
-            android:name=".ToDoList"
-            android:exported="false" />
-        <activity
-            android:name=".VideoLectures"
-            android:exported="false" />
-        <activity
             android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>
