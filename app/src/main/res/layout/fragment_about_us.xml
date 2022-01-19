@@ -7,14 +7,15 @@
     tools:context=".AboutUsFragment">
 
 
-    <ImageView
+    <com.ortiz.touchview.TouchImageView
+        android:id="@+id/devImage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintHeight_percent=".72"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         android:scaleType="fitStart"
-        android:src="@drawable/about_developers"
+        android:src="@drawable/about_us"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

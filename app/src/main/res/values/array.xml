@@ -25,7 +25,7 @@
         <item>@drawable/tasklist_90px</item>
         <item>0</item>
         <item>@drawable/info_90px</item>
-        <item>@drawable/logout_96px</item>
+        <item>@drawable/logout_96_newpx</item>
 
     </string-array>
 </resources>
