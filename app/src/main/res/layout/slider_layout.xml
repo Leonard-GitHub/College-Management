@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="24dp"
-        android:text="NOW GET ALL YOUR LECTURES IN JUST FEW CLICKS."
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="16dp"
