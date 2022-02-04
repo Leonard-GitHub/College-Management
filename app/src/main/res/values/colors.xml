@@ -7,8 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="lightttBlue">#1B4067</color>
-    <color name="pink">#9E00FF</color>
+    <color name="lightttBlue">#0E66B9</color>
+
+    <color name="lightgrayyyyy">#2e3748</color>
+    <color name="superlightgrayyyyy">#414a5b</color>
 
     //onboarding colors
     <color name="background">#F0F4F3</color>

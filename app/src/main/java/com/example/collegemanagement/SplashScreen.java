@@ -28,7 +28,7 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 firstTime();
             }
-        },2000);
+        },1000);
 
 
     }

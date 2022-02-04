@@ -2,7 +2,10 @@ package com.example.collegemanagement;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
@@ -10,11 +13,19 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.core.view.MenuItemCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +34,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
@@ -31,83 +43,87 @@ import java.util.Arrays;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener{
-
-    private Button btnSignOut;
-    private GoogleSignInClient mGoogleSignInClient;
-
-    TextView email, name;
-    CircleImageView userProfileImage;
+public class MainActivity extends AppCompatActivity{
 
 
-
-    private static final int POS_HOME = 0;
-    private static final int POS_NOTES = 1;
-    private static final int POS_VIDEO_LECTURES = 2;
-    private static final int POS_QUESTION_PAPER = 3;
-    private static final int POS_TO_DO_LIST = 4;
-    private static final int POS_ABOUT = 6;
-    private static final int POS_LOGOUT = 7;
-
+    DrawerLayout drawerLayout;
+    ActionBarDrawerToggle toggle;
     Toolbar toolbar;
+    NavigationView navigationView;
 
 
-
-    private String[] screenTitles;
-    private Drawable[] screenIcons;
-
-    private SlidingRootNav slidingRootNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = findViewById(R.id.toolbar);
+        drawerLayout=findViewById(R.id.drawer);
+        toolbar=findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
+        toggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView=findViewById(R.id.nav_view);
+        loadFragment(new HomeFragment());
 
-        slidingRootNav = new SlidingRootNavBuilder(this)
-                .withDragDistance(225)
-                .withRootViewScale(0.75f)
-                .withRootViewElevation(25)
-                .withToolbarMenuToggle(toolbar)
-                .withMenuOpened(false)
-                .withContentClickableWhenMenuOpened(false)
-                .withSavedState(savedInstanceState)
-                .withMenuLayout(R.layout.drawer_menu)
-                .inject();
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int id=menuItem.getItemId();
+                Fragment fragment=null;
+                switch (id)
+                {
+                    case R.id.home:
+                        fragment=new HomeFragment();
+                        loadFragment(fragment);
 
-        screenIcons= loadScreenIcons();
-        screenTitles = loadScreenTitles();
-        
+                        break;
+                    case R.id.notes:
+                        fragment=new NotesFragment();
+                        loadFragment(fragment);
 
+                        break;
+                    case R.id.video_lectures:
+                        fragment=new VideoLecturesFragment();
+                        loadFragment(fragment);
 
+                        break;
+                    case R.id.question_papers:
+                        fragment=new QuestionPaperFragment();
+                        loadFragment(fragment);
 
-        DrawerAdapter adapter = new DrawerAdapter(Arrays.asList(
-                createItemFor(POS_HOME).setChecked(true),
-                createItemFor(POS_NOTES),
-                createItemFor(POS_VIDEO_LECTURES),
-                createItemFor(POS_QUESTION_PAPER),
-                createItemFor(POS_TO_DO_LIST),
-                new SpaceItem(48),
-                createItemFor(POS_ABOUT),
-                createItemFor(POS_LOGOUT)
-        ));
-        adapter.setListener(this);
+                        break;
+                    case R.id.todolist:
+                        fragment=new TodoListFragment();
+                        loadFragment(fragment);
 
-        RecyclerView list = findViewById(R.id.drawer_list);
-        list.setNestedScrollingEnabled(false);
-        list.setLayoutManager(new LinearLayoutManager(this));
-        list.setAdapter(adapter);
+                        break;
+                    case R.id.setting:
+                        Intent i = new Intent(getApplicationContext(), SettingActivity.class);
+                        startActivity(i);
 
-        adapter.setSelected(POS_HOME);
+                        break;
+                    case R.id.logout:
+                        fragment=new LogoutFragment();
+                        loadFragment(fragment);
 
+                        break;
+
+                    default:
+                        return true;
+                }
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
 
 
         //for usr profile and name
-        userProfileImage = findViewById(R.id.image_usr);
-        email = findViewById(R.id.email_address);
-        name = findViewById(R.id.name_usr);
+        View hView = navigationView.getHeaderView(0);
+        TextView email = (TextView) hView.findViewById(R.id.main_email);
+        TextView name = (TextView) hView.findViewById(R.id.main_name);
+        CircleImageView userProfileImage = (CircleImageView) hView.findViewById(R.id.image_usr);
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if (acct != null) {
             String personName = acct.getDisplayName();
@@ -123,113 +139,41 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
 
     }
 
-    private DrawerItem createItemFor(int position){
-        return new SimpleItem(screenIcons[position],screenTitles[position])
-                .withIconTint(color(R.color.lightttBlue))
-                .withTextTint(color(R.color.black))
-                .withSelectedIconTint(color(R.color.lightttBlue))
-                .withSelectedTextTint(color(R.color.lightttBlue));
+
+    private void loadFragment(Fragment fragment) {
+        FragmentManager fragmentManager=getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame,fragment).commit();
+        drawerLayout.closeDrawer(GravityCompat.START);
+        fragmentTransaction.addToBackStack(null);
+
+
     }
 
 
-    @ColorInt
-    private int color(@ColorRes int res) {
-        return ContextCompat.getColor(this, res);
-    }
+
+    //for toolbar options
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu,menu);
 
-
-
-
-
-    private String[] loadScreenTitles() {
-        return getResources().getStringArray(R.array.id_activityScreenTitles);
-    }
-
-    private Drawable[] loadScreenIcons() {
-        TypedArray ta = getResources().obtainTypedArray(R.array.id_activityScreenIcons);
-        Drawable[] icons = new Drawable[ta.length()];
-        for(int i =0; i<ta.length(); i++){
-            int id  = ta.getResourceId(i,0);
-            if(id!=0){
-                icons[i] = ContextCompat.getDrawable(this,id);
+        MenuItem menuItem = menu.findItem(R.id.toolBar_profile_icon);
+        View view = MenuItemCompat.getActionView(menuItem);
+        CircleImageView toolbarProfile = view.findViewById(R.id.toolBar_profile_pic);
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        if (acct != null) {
+            Uri personPhoto = acct.getPhotoUrl();
+            Glide.with(this).load(String.valueOf(personPhoto)).into(toolbarProfile);
+        }
+        toolbarProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),Profile_Activity.class);
+                startActivity(i);
             }
-        }
-
-        ta.recycle();
-        return icons;
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        finish();
-    }
-
-    public void setSupportActionBar(Toolbar toolbar) {
-    }
-
-
-
-
-
-    @Override
-    public void onItemSelected(int position) {
-
-        FragmentTransaction transition  = getSupportFragmentManager().beginTransaction();
-
-        if (position == POS_HOME) {
-            toolbar.setTitle("HOME");
-            HomeFragment homeFragment = new HomeFragment();
-            transition.replace(R.id.container, homeFragment);
-        }
-
-
-        else if (position == POS_NOTES) {
-            toolbar.setTitle("NOTES");
-            NotesFragment notesFragment =  new NotesFragment();
-            transition.replace(R.id.container, notesFragment);
-        }
-
-
-        else if (position == POS_VIDEO_LECTURES) {
-            toolbar.setTitle("Video Lectures");
-           VideoLecturesFragment videoLecturesFragment = new VideoLecturesFragment();
-            transition.replace(R.id.container, videoLecturesFragment);
-        }
-
-
-        else if (position == POS_QUESTION_PAPER) {
-            toolbar.setTitle("Question Papers");
-            QuestionPaperFragment questionPaperFragment = new QuestionPaperFragment();
-            transition.replace(R.id.container, questionPaperFragment);
-        }
-
-
-        else if (position == POS_TO_DO_LIST) {
-            toolbar.setTitle("To-Do List");
-            TodoListFragment todoListFragment = new TodoListFragment();
-            transition.replace(R.id.container, todoListFragment);
-        }
-
-        else if (position == POS_ABOUT) {
-            toolbar.setTitle("About");
-            AboutUsFragment aboutUsFragment = new AboutUsFragment();
-            transition.replace(R.id.container, aboutUsFragment);
-        }
-
-        else if (position == POS_LOGOUT) {
-            LogoutFragment logoutFragment = new LogoutFragment();
-            transition.replace(R.id.container, logoutFragment);
-            finish();
-        }
-
-
-        slidingRootNav.closeMenu();
-        transition.addToBackStack(null);
-        transition.commit();
-
-
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 }

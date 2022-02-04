@@ -1,30 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="id_activityScreenTitles">
-
-        <item>Home</item>
-        <item>Notes</item>
-        <item>Video Lectures</item>
-        <item>Question Paper</item>
-        <item>To-Do List</item>
-        <item></item>
-        <item>About</item>
-        <item>Logout</item>
-    </string-array>
-
-
-
-    <string-array name="id_activityScreenIcons">
-
-
-        <item>@drawable/home_96px</item>
-        <item>@drawable/notes__1_</item>
-        <item>@drawable/video_playlist_90px</item>
-        <item>@drawable/stack_of_paper_96px</item>
-        <item>@drawable/tasklist_90px</item>
-        <item>0</item>
-        <item>@drawable/info_90px</item>
-        <item>@drawable/logout_96_newpx</item>
-
-    </string-array>
 </resources>

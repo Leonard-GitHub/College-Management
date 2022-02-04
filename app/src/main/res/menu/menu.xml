@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single"
+        android:id="@+id/group1">
+        <item
+            android:title="Dashboard"
+            android:icon="@drawable/home_96px"
+            android:id="@+id/home"
+            />
+        <item
+            android:title="Notes"
+            android:icon="@drawable/notes"
+            android:id="@+id/notes"
+            />
+        <item
+            android:title="Video Lectures"
+            android:icon="@drawable/video_playlist_90px"
+            android:id="@+id/video_lectures"
+            />
+        <item
+            android:title="Question Papers"
+            android:icon="@drawable/stack_of_paper_96px"
+            android:id="@+id/question_papers"
+            />
+        <item
+            android:title="To-Do List"
+            android:icon="@drawable/tasklist_90px"
+            android:id="@+id/todolist"
+            />
+    </group>
+
+    <group android:checkableBehavior="none"
+        android:id="@+id/group2">
+        <item
+            android:title="Setting"
+            android:icon="@drawable/setting"
+            android:id="@+id/setting"/>
+        <item
+            android:title="Logout"
+            android:icon="@drawable/logout_96_newpx"
+            android:id="@+id/logout"/>
+    </group>
+</menu>
