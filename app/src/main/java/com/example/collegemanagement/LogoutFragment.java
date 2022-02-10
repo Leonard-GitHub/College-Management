@@ -23,7 +23,7 @@ public class LogoutFragment extends Fragment {
 
         FirebaseAuth.getInstance().signOut();
         Toast.makeText(getActivity(),"You are Logged Out",Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        Intent intent = new Intent(getActivity(), LoginDecisionActivity.class);
         startActivity(intent);
         return root;
     }
