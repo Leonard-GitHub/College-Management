@@ -23,11 +23,6 @@
             android:icon="@drawable/stack_of_paper_96px"
             android:id="@+id/question_papers"
             />
-        <item
-            android:title="To-Do List"
-            android:icon="@drawable/tasklist_90px"
-            android:id="@+id/todolist"
-            />
     </group>
 
     <group android:checkableBehavior="none"
