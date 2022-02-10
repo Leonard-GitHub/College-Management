@@ -21,11 +21,15 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 
 public class UploadQuestionPaperFragment extends Fragment {
@@ -35,9 +39,9 @@ public class UploadQuestionPaperFragment extends Fragment {
     Button button;
     StorageReference storageReference;
     DatabaseReference databaseReference;
+    MaterialCheckBox
 
 
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -82,6 +86,45 @@ public class UploadQuestionPaperFragment extends Fragment {
 
         if (requestCode==12 & resultCode==RESULT_OK && data.getData()!=null){
             button.setEnabled(true);
+            editText.setText(data.getDataString().substring(data.getDataString().lastIndexOf("/")+1));
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    uploadPDFfileFirebase(data.getData());
+                }
+            });
         }
+    }
+
+    private void uploadPDFfileFirebase(Uri data) {
+
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setTitle("File is Uploading...");
+        progressDialog.show();
+
+        StorageReference reference = storageReference.child("QuestionPapers"+editText+".pdf");
+        reference.putFile(data)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                        while(!uriTask.isComplete());
+                        Uri uri = uriTask.getResult();
+                        putPDF putPDF = new putPDF(editText.getText().toString(), uri.toString());
+                        databaseReference.child(databaseReference.push().getKey()).setValue(putPDF);
+                        Toast.makeText(getContext(),"File Uploaded", Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
+
+                    }
+                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+
+                double progress=(100.0*snapshot.getBytesTransferred())/ snapshot.getTotalByteCount();
+                progressDialog.setMessage("File Uploaded.."+(int) progress+"%");
+
+            }
+        });
     }
 }
