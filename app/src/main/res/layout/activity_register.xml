@@ -34,7 +34,7 @@
         android:drawableTint="@color/lighthotred"
         android:ems="10"
         android:fontFamily="@font/sequel_sans_light_head"
-        android:hint="EMAIL"
+        android:hint="FULL NAME"
         android:inputType="textPersonName"
         android:padding="10dp"
         android:textColor="@color/lighthotred"
