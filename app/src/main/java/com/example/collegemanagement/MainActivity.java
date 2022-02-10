@@ -113,7 +113,6 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-
         //for usr profile and name
         View hView = navigationView.getHeaderView(0);
         TextView email = (TextView) hView.findViewById(R.id.main_email);

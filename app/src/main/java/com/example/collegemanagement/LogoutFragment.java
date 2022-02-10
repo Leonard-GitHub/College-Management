@@ -25,6 +25,7 @@ public class LogoutFragment extends Fragment {
         Toast.makeText(getActivity(),"You are Logged Out",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getActivity(), LoginDecisionActivity.class);
         startActivity(intent);
+        getActivity().onBackPressed();
         return root;
     }
 
