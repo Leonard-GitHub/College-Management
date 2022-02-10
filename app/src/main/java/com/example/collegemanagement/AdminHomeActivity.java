@@ -24,25 +24,6 @@ public class AdminHomeActivity extends AppCompatActivity {
 
         replace(new HomeFragment());
         bottomBar = findViewById(R.id.bottomBar);
-        bottomBar.setOnItemSelectedListener(new OnItemSelectedListener() {
-            @Override
-            public boolean onItemSelect(int i) {
-                switch (i){
-                    case 0:
-                        replace(new UploadQuestionPaperFragment());
-                        break;
-
-                    case 1:
-                        replace(new UploadVideoLecturesFragment());
-                        break;
-
-                    case 2:
-                        replace(new UploadNotesFragment());
-                        break;
-                }
-                return true;
-            }
-        });
 
     }
 

@@ -14,21 +14,27 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 
 public class UploadQuestionPaperFragment extends Fragment {
 
-    ImageView upload;
-    Uri imageuri = null;
-    ProgressDialog dialog;
+    EditText editText;
+    ImageView imageView;
+    Button button;
+    StorageReference storageReference;
+    DatabaseReference databaseReference;
 
 
     @Override
@@ -39,71 +45,43 @@ public class UploadQuestionPaperFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        upload = getView().findViewById(R.id.uploadpdf);
-        upload.setOnClickListener(new View.OnClickListener() {
+
+        editText = getView().findViewById(R.id.edit_pdf_name);
+        imageView = getView().findViewById(R.id.uploadpdf);
+        button = getView().findViewById(R.id.uploadbtn);
+
+        storageReference = FirebaseStorage.getInstance().getReference();
+        databaseReference = FirebaseDatabase.getInstance().getReference("uploadPDF");
+
+        button.setEnabled(false);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent galleryIntent = new Intent();
-                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-
-                // We will be redirected to choose pdf
-                galleryIntent.setType("application/pdf");
-                startActivityForResult(galleryIntent, 1);
+                selectPDF();
             }
         });
-
 
         View view = (ViewGroup)  inflater.inflate(R.layout.fragment_upload_question_paper,container,false);
         return view;
     }
 
 
+    private void selectPDF() {
+
+        Intent intent = new Intent();
+        intent.setType("application/pdf");
+        intent.setAction(intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "SELECT PDF FILE"), 12);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
 
-            // Here we are initialising the progress dialog box
-            dialog = new ProgressDialog(getContext());
-            dialog.setMessage("Uploading");
 
-            // this will show message uploading
-            // while pdf is uploading
-            dialog.show();
-            imageuri = data.getData();
-            final String timestamp = "" + System.currentTimeMillis();
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-            final String messagePushID = timestamp;
-            Toast.makeText(getContext(), imageuri.toString(), Toast.LENGTH_SHORT).show();
-
-            // Here we are uploading the pdf in firebase storage with the name of current time
-            final StorageReference filepath = storageReference.child("questionpaper/" + "." + "pdf");
-            Toast.makeText(getContext(), filepath.getName(), Toast.LENGTH_SHORT).show();
-            filepath.putFile(imageuri).continueWithTask(new Continuation() {
-                @Override
-                public Object then(@NonNull Task task) throws Exception {
-                    if (!task.isSuccessful()) {
-                        throw task.getException();
-                    }
-                    return filepath.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    if (task.isSuccessful()) {
-                        // After uploading is done it progress
-                        // dialog box will be dismissed
-                        dialog.dismiss();
-                        Uri uri = task.getResult();
-                        String myurl;
-                        myurl = uri.toString();
-                        Toast.makeText(getContext(), "Uploaded Successfully", Toast.LENGTH_SHORT).show();
-                    } else {
-                        dialog.dismiss();
-                        Toast.makeText(getContext(), "UploadedFailed", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+        if (requestCode==12 & resultCode==RESULT_OK && data.getData()!=null){
+            button.setEnabled(true);
         }
     }
 }

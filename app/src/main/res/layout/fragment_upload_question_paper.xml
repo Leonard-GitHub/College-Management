@@ -17,7 +17,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/lightgrayyyyy" />
 
-    <TextView
+    <EditText
+        android:id="@+id/edit_pdf_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Upload A Pdf"
@@ -26,5 +27,14 @@
         app:layout_constraintBottom_toTopOf="@+id/uploadpdf"
         app:layout_constraintEnd_toEndOf="@+id/uploadpdf"
         app:layout_constraintStart_toStartOf="@+id/uploadpdf" />
+
+    <Button
+        android:id="@+id/uploadbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="upload"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/uploadpdf" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
