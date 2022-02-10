@@ -98,15 +98,5 @@
                     app:layout_constraintTop_toBottomOf="@+id/edit_text_password" />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </eightbitlab.com.blurview.BlurView>
-
-
-    </androidx.cardview.widget.CardView>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
