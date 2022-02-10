@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "706817259061-j3nst46dfcpb48p7pq2qpnupopitsl5i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.collegemanagement",
+            "certificate_hash": "0b022fc8ee9016bb6b8954114006f5bc723594f6"
+          }
+        },
+        {
           "client_id": "706817259061-pgtr1tle5vh6jqtqv45pjaomkuau7rqm.apps.googleusercontent.com",
           "client_type": 3
         }
