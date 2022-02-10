@@ -94,11 +94,6 @@ public class MainActivity extends AppCompatActivity{
                         loadFragment(fragment);
 
                         break;
-                    case R.id.todolist:
-                        fragment=new TodoListFragment();
-                        loadFragment(fragment);
-
-                        break;
                     case R.id.setting:
                         Intent i = new Intent(getApplicationContext(), SettingActivity.class);
                         startActivity(i);
