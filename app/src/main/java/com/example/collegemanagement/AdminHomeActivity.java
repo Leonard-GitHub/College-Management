@@ -22,8 +22,27 @@ public class AdminHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_home);
 
 
-        replace(new HomeFragment());
+        replace(new UploadQuestionPaperFragment());
         bottomBar = findViewById(R.id.bottomBar);
+        bottomBar.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public boolean onItemSelect(int i) {
+                switch (i) {
+                    case 0:
+                        replace(new UploadQuestionPaperFragment());
+                        break;
+
+                    case 1:
+                        replace(new UploadVideoLecturesFragment());
+                        break;
+
+                    case 2:
+                        replace(new UploadNotesFragment());
+                        break;
+                }
+                return false;
+            }
+        });
 
     }
 

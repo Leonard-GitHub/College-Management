@@ -39,8 +39,6 @@ public class UploadQuestionPaperFragment extends Fragment {
     Button button;
     StorageReference storageReference;
     DatabaseReference databaseReference;
-    MaterialCheckBox
-
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
