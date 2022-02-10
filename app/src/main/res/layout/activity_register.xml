@@ -117,7 +117,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onCheckboxClicked"
-        android:text="@string/meat"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        android:text="STUDENT"
+        android:textColor="@color/hotred"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextConfirmPassword" />
 
@@ -127,7 +130,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onCheckboxClicked"
-        android:text="@string/cheese"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/hotred"
+        android:text="TEACHER"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextConfirmPassword" />
 
