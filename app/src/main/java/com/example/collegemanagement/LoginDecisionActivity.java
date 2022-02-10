@@ -19,6 +19,9 @@ public class LoginDecisionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_decision);
 
+
+
+
         loginbtn = findViewById(R.id.normal_login);
         registertxt = findViewById(R.id.goto_signup_activity);
 
@@ -29,6 +32,8 @@ public class LoginDecisionActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
 
 
         registertxt.setOnClickListener(new View.OnClickListener() {
