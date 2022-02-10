@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CollegeManagement">
         <activity
-            android:name=".SignupActivity"
+            android:name=".RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".SettingActivity"
