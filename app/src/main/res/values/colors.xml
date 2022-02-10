@@ -11,6 +11,8 @@
 
     <color name="lightgrayyyyy">#2e3748</color>
     <color name="superlightgrayyyyy">#414a5b</color>
+    <color name="hotred">#751111</color>
+    <color name="lighthotred">#9E3D3D</color>
 
     //onboarding colors
     <color name="background">#F0F4F3</color>
