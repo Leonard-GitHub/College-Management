@@ -53,7 +53,7 @@ public class IntroActivity extends AppCompatActivity {
                     mSLideViewPager.setCurrentItem(getitem(1),true);
                 else {
 
-                    Intent i = new Intent(IntroActivity.this,LoginActivity.class);
+                    Intent i = new Intent(IntroActivity.this, LoginDecisionActivity.class);
                     startActivity(i);
                     finish();
 
@@ -67,7 +67,7 @@ public class IntroActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                Intent i = new Intent(IntroActivity.this,LoginActivity.class);
+                Intent i = new Intent(IntroActivity.this, LoginDecisionActivity.class);
                 startActivity(i);
                 finish();
 

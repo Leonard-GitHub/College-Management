@@ -1,31 +1,21 @@
 package com.example.collegemanagement;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
-public class Profile_Activity extends AppCompatActivity {
-
-    TextView email, name;
-    CircleImageView userProfileImage;
-
-    Toolbar profileToolbar;
+public class ProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
 
         profileToolbar=findViewById(R.id.profile_toolbar);
         profileToolbar.setTitle("Profile");

@@ -50,7 +50,7 @@ public class SplashScreen extends AppCompatActivity {
             // record the fact that the app has been started at least once
             settings.edit().putBoolean("my_first_time", false).commit();
         } else {
-            Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
+            Intent intent = new Intent(SplashScreen.this, LoginDecisionActivity.class);
             startActivity(intent);
             finish();
 
