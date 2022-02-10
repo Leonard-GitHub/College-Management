@@ -7,57 +7,42 @@
     tools:context=".SignupActivity">
 
 
-
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/alegreya_black"
+        android:layout_marginTop="50dp"
         android:letterSpacing=".05"
         android:text="Create Account"
         android:textColor="@color/black"
         android:textSize="50sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias=".1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".1" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <EditText
+        android:id="@+id/edit_text_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#3BFFFFFF"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/login_signup_edittext_bg"
+        android:drawablePadding="8dp"
+        android:drawableTint="@color/lighthotred"
+        android:ems="10"
+        android:fontFamily="@font/sequel_sans_light_head"
+        android:hint="EMAIL"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textColor="@color/lighthotred"
+        android:textColorHint="@color/lighthotred"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
-
-
-        <EditText
-            android:id="@+id/edit_text_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/login_signup_edittext_bg"
-            android:drawableLeft="@drawable/email_icon"
-            android:drawablePadding="8dp"
-            android:drawableTint="@color/lighthotred"
-            android:ems="10"
-            android:fontFamily="@font/sequel_sans_light_head"
-            android:hint="EMAIL"
-            android:inputType="textPersonName"
-            android:padding="10dp"
-            android:textColor="@color/lighthotred"
-            android:textColorHint="@color/lighthotred"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent=".9" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintWidth_percent=".9" />
 
         <EditText
             android:id="@+id/edit_text_emailaddress"
@@ -67,7 +52,6 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/login_signup_edittext_bg"
-            android:drawableLeft="@drawable/email_icon"
             android:drawablePadding="8dp"
             android:drawableTint="@color/lighthotred"
             android:ems="10"
@@ -91,7 +75,6 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/login_signup_edittext_bg"
-            android:drawableLeft="@drawable/password_icon"
             android:drawablePadding="8dp"
             android:drawableTint="@color/lighthotred"
             android:ems="10"
@@ -115,7 +98,6 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/login_signup_edittext_bg"
-            android:drawableLeft="@drawable/password_icon"
             android:drawablePadding="8dp"
             android:ems="10"
             android:fontFamily="@font/sequel_sans_light_head"
@@ -129,23 +111,21 @@
             app:layout_constraintTop_toBottomOf="@+id/edit_text_password"
             app:layout_constraintWidth_percent=".9" />
 
-        <Button
-            android:id="@+id/signupbutton"
-            android:layout_width="wrap_content"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/normal_login"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="32dp"
-            android:background="@drawable/login_signup_btn_bg"
-            android:text="Sign UP"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/login_btn_background"
+            android:text="Sign up"
             android:textColor="@color/white"
-            android:textSize="20sp"
             app:backgroundTint="@null"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextConfirmPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextTextConfirmPassword" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
