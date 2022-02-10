@@ -61,7 +61,6 @@ public class RegisterActivity extends AppCompatActivity {
                             userInfo.put("Email",email.getText().toString());
 
                             userInfo.put("isAdmin","0");
-
                             df.set(userInfo);
 
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
