@@ -78,11 +78,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Log.d("TAG", "onSuccess: " + documentSnapshot.getData());
 
-                if(documentSnapshot.getString("isAdmin") != null){
+                if(documentSnapshot.getString("isTeacher") != null){
                     startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
                     finish();
                 }
-                if(documentSnapshot.getString("isUser") != null) {
+                if(documentSnapshot.getString("isStudent") != null) {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 }
@@ -104,8 +104,27 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-            finish();
+            DocumentReference df = FirebaseFirestore.getInstance().collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.getString("isTeacher") != null){
+                    startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
+                    finish();
+                }
+                if(documentSnapshot.getString("isStudent") != null){
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
+                }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    FirebaseAuth.getInstance().signOut();
+                    startActivity(new Intent(getApplicationContext(),LoginDecisionActivity.class));
+                    finish();
+                }
+            });
         }
     }
 }
