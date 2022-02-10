@@ -112,9 +112,25 @@
             app:layout_constraintWidth_percent=".9" />
 
 
-    <CheckedTextView
+    <CheckBox
+        android:id="@+id/student_chk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/meat"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextConfirmPassword" />
+
+
+    <CheckBox
+        android:id="@+id/teacher_chk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/cheese"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextConfirmPassword" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/normal_login"
             android:layout_width="match_parent"
@@ -129,7 +145,7 @@
             app:backgroundTint="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextConfirmPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/teacher_chk" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
