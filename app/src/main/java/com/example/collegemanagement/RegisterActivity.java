@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -41,36 +42,41 @@ public class RegisterActivity extends AppCompatActivity {
         password = findViewById(R.id.edit_text_password);
         signup = findViewById(R.id.normal_login);
 
-        checkField(fullname);
-        checkField(email);
-        checkField(password);
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkField(fullname);
+                checkField(email);
+                checkField(password);
 
-        if(valid){
-            fAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                @Override
-                public void onSuccess(AuthResult authResult) {
-                    FirebaseUser user = fAuth.getCurrentUser();
-                    Toast.makeText(RegisterActivity.this, "Yay!!! Account Created", Toast.LENGTH_SHORT).show();
-                    DocumentReference df = fStore.collection("Users").document(user.getUid());
-                    Map<String,Object> userInfo = new HashMap<>();
-                    userInfo.put("FullName",fullname.getText().toString());
-                    userInfo.put("Email",email.getText().toString());
+                if(valid){
+                    fAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+                            FirebaseUser user = fAuth.getCurrentUser();
+                            Toast.makeText(RegisterActivity.this, "Yay!!! Account Created", Toast.LENGTH_SHORT).show();
+                            DocumentReference df = fStore.collection("Users").document(user.getUid());
+                            Map<String,Object> userInfo = new HashMap<>();
+                            userInfo.put("FullName",fullname.getText().toString());
+                            userInfo.put("Email",email.getText().toString());
 
-                    userInfo.put("isAdmin","0");
+                            userInfo.put("isAdmin","0");
 
-                    df.set(userInfo);
+                            df.set(userInfo);
 
-                    startActivity(new Intent(getApplicationContext(),MainActivity.class);
-                    finish();
+                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            finish();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(RegisterActivity.this, "Failed to Create Account", Toast.LENGTH_SHORT).show();
+                            e.getMessage();
+                        }
+                    });
                 }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(RegisterActivity.this, "Failed to Create Account", Toast.LENGTH_SHORT).show();
-                    e.getMessage();
-                }
-            })
-        }
+            }
+        });
     }
     public boolean checkField(EditText textField){
         if(textField.getText().toString().isEmpty()){

@@ -36,6 +36,7 @@ public class LoginDecisionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginDecisionActivity.this,RegisterActivity.class);
                 startActivity(intent);
+
             }
         });
 
