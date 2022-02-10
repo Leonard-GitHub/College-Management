@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -56,14 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
-        isStudent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(compoundButton.isChecked()){
-                    isTeacher.setChecked(false);
-                }
-            }
-        });
+        isStudent.setOnCheckedChangeListener(new MaterialCheckBox().oncheck)
 
 
         signup.setOnClickListener(new View.OnClickListener() {
