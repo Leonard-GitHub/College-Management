@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity{
         toolbarProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),Profile_Activity.class);
+                Intent i = new Intent(getApplicationContext(),ProfileActivity.class);
                 startActivity(i);
             }
         });
