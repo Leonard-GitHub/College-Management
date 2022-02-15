@@ -9,25 +9,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.material.navigation.NavigationBarView;
+
 import me.ibrahimsn.lib.OnItemSelectedListener;
 import me.ibrahimsn.lib.SmoothBottomBar;
 
+
 public class AdminHomeActivity extends AppCompatActivity {
 
-    SmoothBottomBar bottomBar;
+    private SmoothBottomBar bottomBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home);
-
-
         replace(new UploadQuestionPaperFragment());
         bottomBar = findViewById(R.id.bottomBar);
         bottomBar.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public boolean onItemSelect(int i) {
-                switch (i) {
+                switch (i){
                     case 0:
                         replace(new UploadQuestionPaperFragment());
                         break;
@@ -40,10 +41,9 @@ public class AdminHomeActivity extends AppCompatActivity {
                         replace(new UploadNotesFragment());
                         break;
                 }
-                return false;
+                return true;
             }
         });
-
     }
 
     private void replace(Fragment fragment) {

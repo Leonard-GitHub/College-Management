@@ -14,6 +14,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -34,6 +37,12 @@ import com.google.firebase.storage.UploadTask;
 
 public class UploadQuestionPaperFragment extends Fragment {
 
+    //for dropdown list
+    String[] items =  {"JAVA","DCN","MALP","SE","CA"};
+    AutoCompleteTextView autoCompleteTxt;
+    ArrayAdapter<String> adapterItems;
+
+    String subject;
     EditText editText;
     ImageView imageView;
     Button button;
@@ -47,13 +56,32 @@ public class UploadQuestionPaperFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = (ViewGroup)  inflater.inflate(R.layout.fragment_upload_question_paper,container,false);
 
-        editText = getView().findViewById(R.id.edit_pdf_name);
-        imageView = getView().findViewById(R.id.uploadpdf);
-        button = getView().findViewById(R.id.uploadbtn);
 
-        storageReference = FirebaseStorage.getInstance().getReference();
-        databaseReference = FirebaseDatabase.getInstance().getReference("uploadPDF");
+        autoCompleteTxt = view.findViewById(R.id.auto_complete_txt);
+        editText = view.findViewById(R.id.edit_pdf_name);
+        imageView = view.findViewById(R.id.uploadpdf);
+        button = view.findViewById(R.id.uploadbtn);
+
+
+
+        //dropdownmenu
+        adapterItems = new ArrayAdapter<String>(getContext(),R.layout.dropdown_list_qp,items);
+        autoCompleteTxt.setAdapter(adapterItems);
+
+        autoCompleteTxt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                subject = item;
+                Toast.makeText(getContext(),"Item: "+subject,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        storageReference = FirebaseStorage.getInstance().getReference("QUESTION PAPER/"+subject);
+        databaseReference = FirebaseDatabase.getInstance().getReference("Question Papers/"+subject);
 
         button.setEnabled(false);
 
@@ -64,7 +92,11 @@ public class UploadQuestionPaperFragment extends Fragment {
             }
         });
 
-        View view = (ViewGroup)  inflater.inflate(R.layout.fragment_upload_question_paper,container,false);
+
+
+
+
+
         return view;
     }
 
@@ -100,7 +132,7 @@ public class UploadQuestionPaperFragment extends Fragment {
         progressDialog.setTitle("File is Uploading...");
         progressDialog.show();
 
-        StorageReference reference = storageReference.child("QuestionPapers"+editText+".pdf");
+        StorageReference reference = storageReference.child("QuestionPapers"+".pdf");
         reference.putFile(data)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -110,7 +142,7 @@ public class UploadQuestionPaperFragment extends Fragment {
                         while(!uriTask.isComplete());
                         Uri uri = uriTask.getResult();
                         putPDF putPDF = new putPDF(editText.getText().toString(), uri.toString());
-                        databaseReference.child(databaseReference.push().getKey()).setValue(putPDF);
+                        databaseReference.child("12"+databaseReference.push().getKey()).setValue(putPDF);
                         Toast.makeText(getContext(),"File Uploaded", Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();
 
@@ -120,7 +152,7 @@ public class UploadQuestionPaperFragment extends Fragment {
             public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
 
                 double progress=(100.0*snapshot.getBytesTransferred())/ snapshot.getTotalByteCount();
-                progressDialog.setMessage("File Uploaded.."+(int) progress+"%");
+                progressDialog.setMessage("File Uploading.."+(int) progress+"%");
 
             }
         });

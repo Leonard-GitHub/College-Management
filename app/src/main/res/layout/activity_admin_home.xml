@@ -31,7 +31,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottommen"
         app:sideMargins="10dp"
-        app:textColor="@color/black"
+        app:textColor="@color/white"
         app:textSize="14sp" />
 
 

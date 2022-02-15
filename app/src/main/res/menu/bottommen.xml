@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/home"
         android:title="Question Paper"
-        android:icon="@drawable/stack_of_paper_96px"/>
+        android:icon="@drawable/stack_of_paper_96px" />
 
     <item android:id="@+id/search"
         android:title="Video Lectures"
-        android:icon="@drawable/video_playlist_90px"/>
+        android:icon="@drawable/video_playlist_90px" />
 
     <item android:id="@+id/profile"
         android:title="Notes"
-        android:icon="@drawable/notes"/>
+        android:icon="@drawable/notes" />
 </menu>
