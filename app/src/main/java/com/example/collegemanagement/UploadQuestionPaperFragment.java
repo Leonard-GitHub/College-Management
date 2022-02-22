@@ -43,6 +43,7 @@ public class UploadQuestionPaperFragment extends Fragment {
     ArrayAdapter<String> adapterItems;
 
 
+    String leo="suraj";
     String subject;
     EditText editText;
     ImageView imageView;
@@ -76,7 +77,7 @@ public class UploadQuestionPaperFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
                 subject = item;
-                Toast.makeText(getContext(),"Item: "+subject.toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Item: "+subject,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -84,7 +85,7 @@ public class UploadQuestionPaperFragment extends Fragment {
 
 
 
-        storageReference = FirebaseStorage.getInstance().getReference("QUESTION PAPER/"+subject);
+        storageReference = FirebaseStorage.getInstance().getReference("QUESTION PAPER/"+leo);
         databaseReference = FirebaseDatabase.getInstance().getReference("Question Papers/"+subject);
 
         button.setEnabled(false);

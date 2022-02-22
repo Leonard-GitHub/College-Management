@@ -42,14 +42,15 @@
         android:layout_marginBottom="24dp"
         android:background="@drawable/button_design"
         android:backgroundTint="@color/black"
+        android:fontFamily="@font/roboto_bold"
         android:inputType="textCapSentences"
         android:text="Next"
         android:textColor="@color/white"
-        app:backgroundTint="@color/black"
         android:textSize="16sp"
-        android:fontFamily="@font/roboto_bold"
+        app:backgroundTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
