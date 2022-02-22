@@ -15,7 +15,7 @@ public class IntroActivity extends AppCompatActivity {
 
     ViewPager mSLideViewPager;
     LinearLayout mDotLayout;
-    Button backbtn, nextbtn, skipbtn;
+    Button nextbtn;
 
     TextView[] dots;
     IntroViewPagerAdapter introViewPagerAdapter;
@@ -28,22 +28,11 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
-        backbtn = findViewById(R.id.backbtn);
+       // backbtn = findViewById(R.id.backbtn);
         nextbtn = findViewById(R.id.nextbtn);
-        skipbtn = findViewById(R.id.skipButton);
 
-        backbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                if (getitem(0) > 0){
 
-                    mSLideViewPager.setCurrentItem(getitem(-1),true);
-
-                }
-
-            }
-        });
 
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,17 +51,7 @@ public class IntroActivity extends AppCompatActivity {
             }
         });
 
-        skipbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-
-                Intent i = new Intent(IntroActivity.this, LoginDecisionActivity.class);
-                startActivity(i);
-                finish();
-
-            }
-        });
 
 
         mSLideViewPager = (ViewPager) findViewById(R.id.slideViewPager);
@@ -103,7 +82,7 @@ public class IntroActivity extends AppCompatActivity {
 
         }
 
-        dots[position].setTextColor(getResources().getColor(R.color.active,getApplicationContext().getTheme()));
+        dots[position].setTextColor(getResources().getColor(R.color.black,getApplicationContext().getTheme()));
 
     }
 
@@ -120,20 +99,20 @@ public class IntroActivity extends AppCompatActivity {
 
             if (position > 0){
 
-                backbtn.setVisibility(View.VISIBLE);
+                //backbtn.setVisibility(View.VISIBLE);
 
                 if(position == (dots.length-1)){
-                    nextbtn.setText("Start");
-                    skipbtn.setVisibility(View.INVISIBLE);
+                    nextbtn.setText("Get Started");
+                  //  skipbtn.setVisibility(View.INVISIBLE);
                 }
                 else{
                     nextbtn.setText("Next");
-                    skipbtn.setVisibility(View.VISIBLE);
+                   // skipbtn.setVisibility(View.VISIBLE);
                 }
 
             }else {
 
-                backbtn.setVisibility(View.INVISIBLE);
+              //  backbtn.setVisibility(View.INVISIBLE);
 
             }
 

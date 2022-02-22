@@ -42,6 +42,7 @@ public class UploadQuestionPaperFragment extends Fragment {
     AutoCompleteTextView autoCompleteTxt;
     ArrayAdapter<String> adapterItems;
 
+
     String subject;
     EditText editText;
     ImageView imageView;
@@ -75,9 +76,12 @@ public class UploadQuestionPaperFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
                 subject = item;
-                Toast.makeText(getContext(),"Item: "+subject,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Item: "+subject.toString(),Toast.LENGTH_SHORT).show();
             }
         });
+
+
+
 
 
         storageReference = FirebaseStorage.getInstance().getReference("QUESTION PAPER/"+subject);
@@ -120,6 +124,7 @@ public class UploadQuestionPaperFragment extends Fragment {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     uploadPDFfileFirebase(data.getData());
                 }
             });
@@ -143,9 +148,8 @@ public class UploadQuestionPaperFragment extends Fragment {
                         Uri uri = uriTask.getResult();
                         putPDF putPDF = new putPDF(editText.getText().toString(), uri.toString());
                         databaseReference.child("12"+databaseReference.push().getKey()).setValue(putPDF);
-                        Toast.makeText(getContext(),"File Uploaded", Toast.LENGTH_LONG).show();
+                       Toast.makeText(getContext(),"File Uploaded", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
-
                     }
                 }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override

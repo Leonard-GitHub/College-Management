@@ -26,11 +26,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.royrodriguez.transitionbutton.TransitionButton;
 
 
 public class LoginActivity extends AppCompatActivity {
     EditText email,password;
-    Button loginBtn;
+    private TransitionButton loginBtn;
     boolean valid = true;
 
     FirebaseAuth fAuth;
@@ -51,6 +52,12 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                // Start the loading animation when the user tap the button
+                loginBtn.startAnimation();
+                checkField(email);
+                checkField(password);
+
                 if(valid){
                     fAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
@@ -61,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            loginBtn.stopAnimation(TransitionButton.StopAnimationStyle.SHAKE, null);
 
 
                         }
@@ -79,11 +87,26 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d("TAG", "onSuccess: " + documentSnapshot.getData());
 
                 if(documentSnapshot.getString("isTeacher") != null){
-                    startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
-                    finish();
+                    loginBtn.stopAnimation(TransitionButton.StopAnimationStyle.EXPAND, new TransitionButton.OnAnimationStopEndListener() {
+                        @Override
+                        public void onAnimationStopEnd() {
+                            Intent intent = new Intent(getBaseContext(), AdminHomeActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
                 }
                 if(documentSnapshot.getString("isStudent") != null) {
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    loginBtn.stopAnimation(TransitionButton.StopAnimationStyle.EXPAND, new TransitionButton.OnAnimationStopEndListener() {
+                        @Override
+                        public void onAnimationStopEnd() {
+                            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
                     finish();
                 }
                 }
@@ -93,6 +116,7 @@ public class LoginActivity extends AppCompatActivity {
     public boolean checkField(EditText textField){
         if(textField.getText().toString().isEmpty()){
             textField.setError("Error");
+            loginBtn.stopAnimation(TransitionButton.StopAnimationStyle.SHAKE, null);
             valid = false;
         }else {
             valid = true;

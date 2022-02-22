@@ -11,145 +11,177 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/alegreya_black"
-        android:layout_marginTop="50dp"
-        android:letterSpacing=".05"
-        android:text="Create Account"
+        android:layout_marginStart="32dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Let's\nget started"
         android:textColor="@color/black"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="40sp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text="Please enter your valid data in order to create\nan account"
+        android:textColor="#757575"
+        android:textSize="15sp"
+        android:layout_marginBottom="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/edit_text_name"
+        app:layout_constraintStart_toStartOf="@+id/edit_text_name" />
 
 
     <EditText
         android:id="@+id/edit_text_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/login_signup_edittext_bg"
-        android:drawablePadding="8dp"
-        android:drawableTint="@color/lighthotred"
-        android:ems="10"
-        android:fontFamily="@font/sequel_sans_light_head"
-        android:hint="FULL NAME"
-        android:inputType="textPersonName"
-        android:padding="10dp"
-        android:textColor="@color/lighthotred"
-        android:textColorHint="@color/lighthotred"
+        android:drawableStart="@drawable/user_32px"
+        android:drawableTint="#FFD1D1D1"
+        android:hint="Name"
+        android:inputType="textEmailAddress"
+        android:paddingStart="10dp"
+        android:singleLine="true"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/edit_text_emailaddress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintWidth_percent=".9" />
-
-        <EditText
-            android:id="@+id/edit_text_emailaddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/login_signup_edittext_bg"
-            android:drawablePadding="8dp"
-            android:drawableTint="@color/lighthotred"
-            android:ems="10"
-            android:fontFamily="@font/sequel_sans_light_head"
-            android:hint="EMAIL"
-            android:inputType="textEmailAddress"
-            android:padding="10dp"
-            android:textColor="@color/lighthotred"
-            android:textColorHint="@color/lighthotred"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_text_name"
-            app:layout_constraintWidth_percent=".9" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
-        <EditText
-            android:id="@+id/edit_text_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/login_signup_edittext_bg"
-            android:drawablePadding="8dp"
-            android:drawableTint="@color/lighthotred"
-            android:ems="10"
-            android:fontFamily="@font/sequel_sans_light_head"
-            android:hint="PASSWORD"
-            android:inputType="textPassword"
-            android:padding="10dp"
-            android:textColor="@color/lighthotred"
-            android:textColorHint="@color/lighthotred"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.555"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_text_emailaddress"
-            app:layout_constraintWidth_percent=".9" />
-
-        <EditText
-            android:id="@+id/editTextTextConfirmPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/login_signup_edittext_bg"
-            android:drawablePadding="8dp"
-            android:ems="10"
-            android:fontFamily="@font/sequel_sans_light_head"
-            android:hint="CONFIRM PASSWORD"
-            android:inputType="textPassword"
-            android:padding="10dp"
-            android:textColor="@color/lighthotred"
-            android:textColorHint="@color/lighthotred"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_text_password"
-            app:layout_constraintWidth_percent=".9" />
-
-
-    <CheckBox
-        android:id="@+id/student_chk"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="16dp"
-        android:text="STUDENT"
-        android:textColor="@color/hotred"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextConfirmPassword" />
-
-
-    <CheckBox
-        android:id="@+id/teacher_chk"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:textColor="@color/hotred"
-        android:text="TEACHER"
+    <EditText
+        android:id="@+id/edit_text_emailaddress"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/login_signup_edittext_bg"
+        android:drawableStart="@drawable/email_96px"
+        android:drawableTint="#FFD1D1D1"
+        android:hint="Email Address"
+        android:inputType="textEmailAddress"
+        android:paddingStart="10dp"
+        android:singleLine="true"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/edit_text_password"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextConfirmPassword" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/normal_login"
-            android:layout_width="match_parent"
+
+    <EditText
+        android:id="@+id/edit_text_password"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/login_signup_edittext_bg"
+        android:drawableStart="@drawable/password_96px"
+        android:drawableTint="#FFD1D1D1"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingStart="9dp"
+        android:password="true"
+        android:scrollbarAlwaysDrawHorizontalTrack="false"
+        android:layout_marginBottom="32dp"
+        android:singleLine="true"
+        android:textColorHighlight="#000000"
+        android:textColorLink="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.royrodriguez.transitionbutton.TransitionButton
+        android:id="@+id/normal_login"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="48dp"
+        android:fontFamily="@font/roboto"
+        android:inputType="textCapSentences"
+        android:text="Sign up"
+        android:textColor="@android:color/white"
+
+        app:defaultColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:loaderColor="@android:color/white" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="48dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/normal_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <com.animsh.animatedcheckbox.AnimatedCheckBox
+            android:id="@+id/teacher_chk"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:text="TEACHER"
+            app:border_stroke_width="2dp"
+            app:color_checked="@color/black"
+            app:color_tick="@color/white"
+            app:color_unchecked="@color/white"
+            app:color_unchecked_stroke="@color/black"
+            app:small_tick="true"
+            app:tick_stroke_width="1dp"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/login_btn_background"
-            android:text="Sign up"
-            android:textColor="@color/white"
-            app:backgroundTint="@null"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/teacher_chk" />
+            android:layout_marginStart="8dp"
+            android:text="TEACHER"
+            app:layout_constraintBottom_toBottomOf="@+id/teacher_chk"
+            app:layout_constraintEnd_toEndOf="@+id/edit_text_password"
+            app:layout_constraintStart_toEndOf="@+id/teacher_chk" />
+
+        <com.animsh.animatedcheckbox.AnimatedCheckBox
+            android:id="@+id/student_chk"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="8dp"
+            android:text="STUDENT"
+            android:layout_marginStart="120dp"
+            app:border_stroke_width="2dp"
+            app:color_checked="@color/black"
+            app:color_tick="@color/white"
+            app:color_unchecked="@color/white"
+            app:color_unchecked_stroke="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/textView1"
+            app:layout_constraintEnd_toStartOf="@+id/textView1"
+            app:layout_constraintStart_toStartOf="@+id/edit_text_password"
+            app:small_tick="true"
+            app:tick_stroke_width="1dp" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="STUDENT"
+            app:layout_constraintBottom_toTopOf="@+id/normal_login" />
+
+
+    </LinearLayout>
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

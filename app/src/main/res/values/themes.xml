@@ -22,15 +22,26 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="AppTheme.popUpOverlay" parent="ThemeOverlay.AppCompat.Light"/>
-    <style name="TextViewStyle" parent="android:Widget.TextView"
-        >
-        <item name="android:fontFamily">@font/sequel_sans_medium_body</item>
+    <style name="TextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">#fff</item>
     </style>
-    <style name="DrawerIcon" parent="Widget.AppCompat.DrawerArrowToggle"
-        >
+    <style name="DrawerIcon" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="color">#AE000000</item>
+    </style>
+
+
+    <style name="AppBottomSheetDialogTheme"
+    parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+
+    <item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
+</style>
+
+    <style name="CustomBottomSheetStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+
+        <item name="android:background">@drawable/bottom_sheet_background</item>
     </style>
 
 </resources>

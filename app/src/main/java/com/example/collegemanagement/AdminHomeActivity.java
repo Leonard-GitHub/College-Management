@@ -40,6 +40,10 @@ public class AdminHomeActivity extends AppCompatActivity {
                     case 2:
                         replace(new UploadNotesFragment());
                         break;
+
+                    case 3:
+                        replace(new UploadQuestionPaperFragment());
+                        break;
                 }
                 return true;
             }

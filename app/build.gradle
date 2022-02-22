@@ -70,4 +70,14 @@ dependencies {
     //bottom navigation bar
     implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.7.6'
 
+    //transition btn
+    implementation 'com.royrodriguez:transitionbutton:0.2.0'
+
+    //animated checkBox
+    implementation 'com.github.animsh:AnimatedCheckBox:1.0.0'
+
+    //Animated Text Field
+    implementation 'com.github.HITGIF:TextFieldBoxes:1.4.5'
+
+
 }

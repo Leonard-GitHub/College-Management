@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminHomeActivity">
+    tools:context=".AdminHomeActivity"
+    android:background="@drawable/lightgreen_to_darkgreen">
 
     <FrameLayout
         android:id="@+id/bottombarframe"
@@ -19,7 +20,7 @@
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        app:backgroundColor="@color/hotred"
+        app:backgroundColor="@color/darkgreenn"
         app:iconSize="24dp"
         app:iconTint="@color/iconTint"
         app:iconTintActive="@color/iconTint"
