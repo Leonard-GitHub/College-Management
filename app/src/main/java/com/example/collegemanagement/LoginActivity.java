@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     private TransitionButton loginBtn;
     boolean valid = true;
 
-    MediaPlayer mp;
+    MediaPlayer mpfail, mpsuccess;
 
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
@@ -51,7 +51,9 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.edit_text_emailaddress);
         password = findViewById(R.id.edit_text_password);
         loginBtn = findViewById(R.id.loginbutton);
-        mp = MediaPlayer.create(this, R.raw.failed_login);
+        mpfail = MediaPlayer.create(this, R.raw.failed_login);
+        mpsuccess = MediaPlayer.create(this,R.raw.success_login_signup);
+
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,14 +68,16 @@ public class LoginActivity extends AppCompatActivity {
                     fAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
+
                             Toast.makeText(LoginActivity.this, "Logged In as Admin", Toast.LENGTH_SHORT).show();
                             checkAccessLevel(authResult.getUser().getUid());
+                            mpsuccess.start();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             loginBtn.stopAnimation(TransitionButton.StopAnimationStyle.SHAKE, null);
-                            mp.start();
+                            mpfail.start();
 
 
                         }
@@ -122,7 +126,7 @@ public class LoginActivity extends AppCompatActivity {
         if(textField.getText().toString().isEmpty()){
             textField.setError("Error");
             loginBtn.stopAnimation(TransitionButton.StopAnimationStyle.SHAKE, null);
-            mp.start();
+            mpfail.start();
             valid = false;
         }else {
             valid = true;

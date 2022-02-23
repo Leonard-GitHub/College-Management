@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="90dp"
         android:text="Video Lectures"
+
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="28dp"
