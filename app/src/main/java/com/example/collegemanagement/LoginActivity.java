@@ -3,6 +3,7 @@ package com.example.collegemanagement;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -34,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
     private TransitionButton loginBtn;
     boolean valid = true;
 
+    MediaPlayer mp;
+
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
 
@@ -48,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.edit_text_emailaddress);
         password = findViewById(R.id.edit_text_password);
         loginBtn = findViewById(R.id.loginbutton);
+        mp = MediaPlayer.create(this, R.raw.failed_login);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             loginBtn.stopAnimation(TransitionButton.StopAnimationStyle.SHAKE, null);
+                            mp.start();
 
 
                         }
@@ -117,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
         if(textField.getText().toString().isEmpty()){
             textField.setError("Error");
             loginBtn.stopAnimation(TransitionButton.StopAnimationStyle.SHAKE, null);
+            mp.start();
             valid = false;
         }else {
             valid = true;
@@ -124,31 +130,5 @@ public class LoginActivity extends AppCompatActivity {
         return valid;
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            DocumentReference df = FirebaseFirestore.getInstance().collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
-            df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if(documentSnapshot.getString("isTeacher") != null){
-                    startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
-                    finish();
-                }
-                if(documentSnapshot.getString("isStudent") != null){
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    finish();
-                }
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    FirebaseAuth.getInstance().signOut();
-                    startActivity(new Intent(getApplicationContext(),LoginDecisionActivity.class));
-                    finish();
-                }
-            });
-        }
-    }
+
 }

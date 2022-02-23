@@ -20,6 +20,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.royrodriguez.transitionbutton.TransitionButton;
 
@@ -57,4 +58,33 @@ public class LoginDecisionActivity extends AppCompatActivity {
         });
     }
 
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            DocumentReference df = FirebaseFirestore.getInstance().collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if(documentSnapshot.getString("isTeacher") != null){
+                        startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
+                        finish();
+                    }
+                    if(documentSnapshot.getString("isStudent") != null){
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        finish();
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    FirebaseAuth.getInstance().signOut();
+                    startActivity(new Intent(getApplicationContext(),LoginDecisionActivity.class));
+                    finish();
+                }
+            });
+        }
+    }
 }

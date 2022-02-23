@@ -118,17 +118,7 @@ public class MainActivity extends AppCompatActivity{
         TextView email = (TextView) hView.findViewById(R.id.main_email);
         TextView name = (TextView) hView.findViewById(R.id.main_name);
         CircleImageView userProfileImage = (CircleImageView) hView.findViewById(R.id.image_usr);
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-        if (acct != null) {
-            String personName = acct.getDisplayName();
-            String personFamilyName = acct.getFamilyName();
-            String personGivenName = acct.getGivenName();
-            String personEmail = acct.getEmail();
-            Uri personPhoto = acct.getPhotoUrl();
-            email.setText(personEmail);
-            name.setText(personGivenName);
-            Glide.with(this).load(String.valueOf(personPhoto)).into(userProfileImage);
-        }
+
 
 
     }

@@ -35,6 +35,9 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseFirestore fStore;
     AnimatedCheckBox isTeacher, isStudent;
 
+
+    MediaPlayer mp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +49,13 @@ public class RegisterActivity extends AppCompatActivity {
         fullname = findViewById(R.id.edit_text_name);
         email = findViewById(R.id.edit_text_emailaddress);
         password = findViewById(R.id.edit_text_password);
-        signup = findViewById(R.id.normal_login);
+        signup = findViewById(R.id.normal_signup);
 
         isTeacher = findViewById(R.id.teacher_chk);
         isStudent = findViewById(R.id.student_chk);
+
+        mp = MediaPlayer.create(this, R.raw.failed_login);
+
 
 
 
@@ -141,6 +147,7 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onFailure(@NonNull Exception e) {
                             signup.stopAnimation(TransitionButton.StopAnimationStyle.SHAKE, null);
                             Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            mp.start();
                         }
                     });
                 }
@@ -151,6 +158,7 @@ public class RegisterActivity extends AppCompatActivity {
         if(textField.getText().toString().isEmpty()){
             textField.setError("Error");
             signup.stopAnimation(TransitionButton.StopAnimationStyle.SHAKE, null);
+            mp.start();
             valid = false;
         }else {
             valid = true;

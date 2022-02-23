@@ -43,7 +43,6 @@ public class UploadQuestionPaperFragment extends Fragment {
     ArrayAdapter<String> adapterItems;
 
 
-    String leo="suraj";
     String subject;
     EditText editText;
     ImageView imageView;
@@ -85,7 +84,7 @@ public class UploadQuestionPaperFragment extends Fragment {
 
 
 
-        storageReference = FirebaseStorage.getInstance().getReference("QUESTION PAPER/"+leo);
+        storageReference = FirebaseStorage.getInstance().getReference("QUESTION PAPER/"+subject);
         databaseReference = FirebaseDatabase.getInstance().getReference("Question Papers/"+subject);
 
         button.setEnabled(false);
@@ -96,10 +95,6 @@ public class UploadQuestionPaperFragment extends Fragment {
                 selectPDF();
             }
         });
-
-
-
-
 
 
         return view;
