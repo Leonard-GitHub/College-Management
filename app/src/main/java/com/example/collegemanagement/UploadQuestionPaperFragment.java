@@ -84,7 +84,7 @@ public class UploadQuestionPaperFragment extends Fragment {
 
 
 
-        storageReference = FirebaseStorage.getInstance().getReference("QUESTION PAPER/"+subject);
+        storageReference = FirebaseStorage.getInstance().getReference("QUESTION PAPER");
         databaseReference = FirebaseDatabase.getInstance().getReference("Question Papers/"+subject);
 
         button.setEnabled(false);
