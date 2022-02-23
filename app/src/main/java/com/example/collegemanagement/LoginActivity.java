@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                     fAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
-                            Toast.makeText(LoginActivity.this, "Logged In as Admin", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Logged In", Toast.LENGTH_SHORT).show();
                             checkAccessLevel(authResult.getUser().getUid());
                         }
                     }).addOnFailureListener(new OnFailureListener() {
