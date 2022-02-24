@@ -75,7 +75,6 @@ public class QuestionPaperFragment extends Fragment {
                     }
                 };
                 listView.setAdapter(arrayAdapter);
-
             }
 
 
