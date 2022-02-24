@@ -40,9 +40,7 @@ public class QuestionPaperFragment extends Fragment {
 
         listView = v.findViewById(R.id.listView);
         uploadedPDF = new ArrayList<>();
-
         retrivePdfFiles();
-
         return v;
     }
 
@@ -76,8 +74,6 @@ public class QuestionPaperFragment extends Fragment {
                 listView.setAdapter(arrayAdapter);
 
             }
-
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
