@@ -34,12 +34,14 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+
 public class UploadQuestionPaperFragment extends Fragment {
 
     //for dropdown list
     String[] items =  {"JAVA","DCN","MALP","SE","CA"};
     AutoCompleteTextView autoCompleteTxt;
     ArrayAdapter<String> adapterItems;
+
 
     String subject;
     EditText editText;
@@ -57,10 +59,13 @@ public class UploadQuestionPaperFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = (ViewGroup)  inflater.inflate(R.layout.fragment_upload_question_paper,container,false);
 
+
         autoCompleteTxt = view.findViewById(R.id.auto_complete_txt);
         editText = view.findViewById(R.id.edit_pdf_name);
         imageView = view.findViewById(R.id.uploadpdf);
         button = view.findViewById(R.id.uploadbtn);
+
+
 
         //dropdownmenu
         adapterItems = new ArrayAdapter<String>(getContext(),R.layout.dropdown_list_qp,items);
@@ -74,9 +79,12 @@ public class UploadQuestionPaperFragment extends Fragment {
                 Toast.makeText(getContext(),"Item: "+subject,Toast.LENGTH_SHORT).show();
             }
         });
+        
+
+
 
         storageReference = FirebaseStorage.getInstance().getReference("QUESTION PAPER");
-        databaseReference = FirebaseDatabase.getInstance().getReference("Question Papers/"+subject);
+        databaseReference = FirebaseDatabase.getInstance().getReference("Question Papers");
 
         button.setEnabled(false);
 
@@ -90,6 +98,7 @@ public class UploadQuestionPaperFragment extends Fragment {
 
         return view;
     }
+
 
     private void selectPDF() {
 

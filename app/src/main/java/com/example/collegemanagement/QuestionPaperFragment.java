@@ -45,10 +45,11 @@ public class QuestionPaperFragment extends Fragment {
     }
 
     private void retrivePdfFiles() {
-        databaseReference = FirebaseDatabase.getInstance().getReference("QuestionPapers");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Question Papers");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    uploadedPDF.clear();
                 for(DataSnapshot ds:snapshot.getChildren()){
                     putPDF putPDF=ds.getValue(com.example.collegemanagement.putPDF.class);
                     uploadedPDF.add(putPDF);
@@ -72,7 +73,6 @@ public class QuestionPaperFragment extends Fragment {
                     }
                 };
                 listView.setAdapter(arrayAdapter);
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

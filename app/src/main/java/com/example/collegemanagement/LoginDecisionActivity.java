@@ -56,13 +56,8 @@ public class LoginDecisionActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
 
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
+        //for automatic login
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
             DocumentReference df = FirebaseFirestore.getInstance().collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
             df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -86,5 +81,16 @@ public class LoginDecisionActivity extends AppCompatActivity {
                 }
             });
         }
+
+
+
+    }
+
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
     }
 }

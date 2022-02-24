@@ -42,7 +42,7 @@ public class AdminHomeActivity extends AppCompatActivity {
                         break;
 
                     case 3:
-                        replace(new UploadQuestionPaperFragment());
+                        replace(new AdminSettingkFragment());
                         break;
                 }
                 return true;

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AdminHomeActivity"
-    android:background="@drawable/lightgreen_to_darkgreen">
+    android:background="@color/white">
 
     <FrameLayout
         android:id="@+id/bottombarframe"
@@ -20,11 +20,11 @@
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        app:backgroundColor="@color/darkgreenn"
+        app:backgroundColor="@color/white"
         app:iconSize="24dp"
-        app:iconTint="@color/iconTint"
-        app:iconTintActive="@color/iconTint"
-        app:indicatorColor="@color/indicatorColor"
+        app:iconTint="@color/black"
+        app:iconTintActive="@color/black"
+        app:indicatorColor="#6FB5B5B5"
         app:indicatorRadius="10dp"
         app:itemPadding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,7 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottommen"
         app:sideMargins="10dp"
-        app:textColor="@color/white"
+        app:textColor="@color/black"
         app:textSize="14sp" />
 
 

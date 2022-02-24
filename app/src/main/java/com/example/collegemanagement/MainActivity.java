@@ -104,6 +104,11 @@ public class MainActivity extends AppCompatActivity{
                         loadFragment(fragment);
 
                         break;
+                    case R.id.about:
+                        fragment=new AboutFragment();
+                        loadFragment(fragment);
+                        break;
+                        
 
                     default:
                         return true;
