@@ -20,7 +20,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_settings">SettingsActivity</string>
 
-   //dropdown
+    //dropdown
     <string name="select">Select Item</string>
 
 </resources>

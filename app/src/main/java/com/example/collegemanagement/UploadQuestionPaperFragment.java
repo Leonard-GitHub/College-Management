@@ -79,13 +79,12 @@ public class UploadQuestionPaperFragment extends Fragment {
                 Toast.makeText(getContext(),"Item: "+subject,Toast.LENGTH_SHORT).show();
             }
         });
-
-
+        
 
 
 
         storageReference = FirebaseStorage.getInstance().getReference("QUESTION PAPER");
-        databaseReference = FirebaseDatabase.getInstance().getReference("Question Papers/"+subject);
+        databaseReference = FirebaseDatabase.getInstance().getReference("Question Papers");
 
         button.setEnabled(false);
 
