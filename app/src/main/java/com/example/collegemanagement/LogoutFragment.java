@@ -26,6 +26,8 @@ public class LogoutFragment extends Fragment {
 
 
 
+
+
         // Create the object of
         // AlertDialog Builder class
         AlertDialog.Builder builder
@@ -33,7 +35,7 @@ public class LogoutFragment extends Fragment {
                 .Builder(getContext());
 
         // Set the message show for the Alert time
-        builder.setMessage("Do you want to logout ?");
+        builder.setMessage("Do you want to logout ?, time Spent is: ");
 
         // Set Alert Title
         builder.setTitle("Alert !");
@@ -56,6 +58,7 @@ public class LogoutFragment extends Fragment {
 
                                 FirebaseAuth.getInstance().signOut();
                                 Toast.makeText(getActivity(),"You are Logged Out",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(),"time spent is ",Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(getActivity(), LoginDecisionActivity.class);
                                 startActivity(intent);
                             }
