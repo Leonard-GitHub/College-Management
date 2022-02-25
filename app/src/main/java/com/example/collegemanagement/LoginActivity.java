@@ -29,6 +29,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.royrodriguez.transitionbutton.TransitionButton;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class LoginActivity extends AppCompatActivity {
     EditText email,password;
@@ -39,6 +42,12 @@ public class LoginActivity extends AppCompatActivity {
 
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
+
+    //timmer
+    Timer timer;
+    TimerTask timerTask;
+    Double time = 0.0;
+    boolean timerStarted = false;
 
 
     @Override
@@ -57,6 +66,10 @@ public class LoginActivity extends AppCompatActivity {
         mpsuccess = MediaPlayer.create(this, R.raw.success_login_signup);
         mpcheckbox = MediaPlayer.create(this,R.raw.checkbox);
 
+
+
+        timer = new Timer();
+
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(AuthResult authResult) {
                             mpsuccess.start();
-                            Toast.makeText(LoginActivity.this, "Logged In as Admin", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Logged In", Toast.LENGTH_SHORT).show();
                             checkAccessLevel(authResult.getUser().getUid());
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -115,6 +128,7 @@ public class LoginActivity extends AppCompatActivity {
                             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                             startActivity(intent);
                             finish();
+
                         }
                     });
                     finish();
@@ -135,5 +149,61 @@ public class LoginActivity extends AppCompatActivity {
         return valid;
     }
 
+
+
+    public void startStopTapped(View view)
+    {
+        if(timerStarted == false)
+        {
+            timerStarted = true;
+
+            startTimer();
+        }
+        else
+        {
+            timerStarted = false;
+
+            timerTask.cancel();
+        }
+    }
+
+
+    private void startTimer()
+    {
+        timerTask = new TimerTask()
+        {
+            @Override
+            public void run()
+            {
+                runOnUiThread(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        time++;
+                    }
+                });
+            }
+
+        };
+        timer.scheduleAtFixedRate(timerTask, 0 ,1000);
+    }
+
+
+    private String getTimerText()
+    {
+        int rounded = (int) Math.round(time);
+
+        int seconds = ((rounded % 86400) % 3600) % 60;
+        int minutes = ((rounded % 86400) % 3600) / 60;
+        int hours = ((rounded % 86400) / 3600);
+
+        return formatTime(seconds, minutes, hours);
+    }
+
+    private String formatTime(int seconds, int minutes, int hours)
+    {
+        return String.format("%02d",hours) + " : " + String.format("%02d",minutes) + " : " + String.format("%02d",seconds);
+    }
 
 }

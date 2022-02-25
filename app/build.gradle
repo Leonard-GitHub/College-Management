@@ -70,7 +70,7 @@ dependencies {
     //bottom navigation bar
     implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.7.9'
     implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:1.3.4'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.3.70' // for use bottom nav
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.6.0' // for use bottom nav
 
     //transition btn
     implementation 'com.royrodriguez:transitionbutton:0.2.0'
@@ -84,5 +84,6 @@ dependencies {
     //PDF VIEWER
     implementation 'com.github.afreakyelf:Pdf-Viewer:v1.0.7'
 
-
+    //Timmer
+    implementation 'com.github.yashovardhan99:TimeIt:1.2.0'
 }

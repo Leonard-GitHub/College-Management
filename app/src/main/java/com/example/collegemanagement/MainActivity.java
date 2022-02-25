@@ -38,7 +38,9 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
+import com.yashovardhan99.timeit.Stopwatch;
 
+import java.sql.Time;
 import java.util.Arrays;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -50,6 +52,9 @@ public class MainActivity extends AppCompatActivity{
     ActionBarDrawerToggle toggle;
     Toolbar toolbar;
     NavigationView navigationView;
+    Stopwatch stopwatch;
+    TextView textTime;
+    String time;
 
 
 
@@ -103,10 +108,20 @@ public class MainActivity extends AppCompatActivity{
                         fragment=new LogoutFragment();
                         loadFragment(fragment);
 
+                        stopwatch.pause();
+                        stopwatch.setTextView(textTime);
+                        time = textTime.getText().toString();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("meassage",time);
+                        // set Fragmentclass Arguments
+                        fragment.setArguments(bundle);
+
                         break;
                     case R.id.about:
                         fragment=new AboutFragment();
                         loadFragment(fragment);
+
+
                         break;
                         
 
@@ -164,5 +179,12 @@ public class MainActivity extends AppCompatActivity{
             }
         });
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.start();
     }
 }
