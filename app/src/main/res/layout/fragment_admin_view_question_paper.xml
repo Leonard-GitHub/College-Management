@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdminViewQuestionPaperFragment">
+
+
+    <EditText
+        android:id="@+id/searchEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/search_bg"
+        android:drawableStart="@drawable/search"
+        android:drawableTint="@color/black"
+        android:hint="Search"
+        android:padding="10dp"
+        android:layout_margin="8dp"
+        android:textColorHint="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginBottom="10dp"
+        tools:layout_editor_absoluteX="10dp" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/subjectsRv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/addSubjectBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchEt"
+        tools:listitem="@layout/row_subjects" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addSubjectBtn"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/roboto_bold"
+        android:inputType="textCapSentences"
+        android:stateListAnimator="@null"
+        android:text="+ Add Subject"
+        android:textColor="@android:color/white"
+        app:backgroundTint="@color/black"
+        app:cornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/addPdfFab"
+        app:layout_constraintStart_toStartOf="parent"
+        app:loaderColor="@android:color/white"
+        app:rippleColor="#606060" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addPdfFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/black"
+        android:src="@drawable/addpdf"
+        app:fabSize="auto"
+        app:rippleColor="#ACACAC"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="#FFFF" />
+    
+    
+</androidx.constraintlayout.widget.ConstraintLayout>

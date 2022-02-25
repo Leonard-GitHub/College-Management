@@ -17,20 +17,20 @@ import me.ibrahimsn.lib.SmoothBottomBar;
 
 public class AdminHomeActivity extends AppCompatActivity {
 
-    private SmoothBottomBar bottomBar;
+    private SmoothBottomBar btmbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home);
-        replace(new UploadQuestionPaperFragment());
-        bottomBar = findViewById(R.id.bottomBar);
-        bottomBar.setOnItemSelectedListener(new OnItemSelectedListener() {
+        replace(new AdminViewQuestionPaperFragment());
+        btmbar = findViewById(R.id.bottomBar);
+        btmbar.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public boolean onItemSelect(int i) {
                 switch (i){
                     case 0:
-                        replace(new UploadQuestionPaperFragment());
+                        replace(new AdminViewQuestionPaperFragment());
                         break;
 
                     case 1:

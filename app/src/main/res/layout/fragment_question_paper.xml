@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".QuestionPaperFragment">
-<ListView
-    android:id="@+id/listView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="7dp"/>
 
-</RelativeLayout>
+    <EditText
+        android:id="@+id/ursearchEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/search_bg"
+        android:drawableStart="@drawable/search"
+        android:drawableTint="@color/black"
+        android:hint="Search"
+        android:padding="10dp"
+        android:layout_margin="8dp"
+        android:textColorHint="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginBottom="10dp"
+        tools:layout_editor_absoluteX="10dp" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ursubjectsRv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="5dp"
+        tools:listitem="@layout/row_subjects" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
