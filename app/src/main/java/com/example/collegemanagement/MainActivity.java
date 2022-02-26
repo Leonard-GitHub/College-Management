@@ -1,22 +1,30 @@
 package com.example.collegemanagement;
 
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,21 +60,60 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends AppCompatActivity{
+
+
+public class MainActivity extends AppCompatActivity {
 
 
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toggle;
     Toolbar toolbar;
     NavigationView navigationView;
-    String s;
-    Temporal ed;
-    String st;
-    Calendar calendar;
-    SimpleDateFormat simpleDateFormat;
+
+
+
+
+    final int MSG_START_TIMER = 0;
+    final int MSG_STOP_TIMER = 1;
+    final int MSG_UPDATE_TIMER = 2;
+
+    Stopwatch timer = new Stopwatch();
+    final int REFRESH_RATE = 100;
+
+    @SuppressLint("HandlerLeak")
+    Handler mHandler = new Handler()
+    {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case MSG_START_TIMER:
+                    timer.start(); //start timer
+                    mHandler.sendEmptyMessage(MSG_UPDATE_TIMER);
+                    break;
+
+                case MSG_UPDATE_TIMER:
+
+                    mHandler.sendEmptyMessageDelayed(MSG_UPDATE_TIMER,REFRESH_RATE); //text view is updated every second,
+                    break;                                  //though the timer is still running
+                case MSG_STOP_TIMER:
+                    mHandler.removeMessages(MSG_UPDATE_TIMER); // no more updates.
+                    timer.stop();//stop timer
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    };
+
+
+
+
 
 
 
@@ -76,67 +123,46 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        calendar = Calendar.getInstance();
-        simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
-        st = simpleDateFormat.format(calendar.getTime());
 
-
-
-        drawerLayout=findViewById(R.id.drawer);
-        toolbar=findViewById(R.id.toolBar);
+        drawerLayout = findViewById(R.id.drawer);
+        toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
-        toggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        navigationView=findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         loadFragment(new HomeFragment());
 
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int id=menuItem.getItemId();
-                Fragment fragment=null;
-                switch (id)
-                {
+                int id = menuItem.getItemId();
+                Fragment fragment = null;
+                switch (id) {
                     case R.id.home:
-                        fragment=new HomeFragment();
+                        fragment = new HomeFragment();
                         loadFragment(fragment);
 
                         break;
                     case R.id.notes:
-                        fragment=new NotesFragment();
+                        fragment = new NotesFragment();
                         loadFragment(fragment);
 
                         break;
                     case R.id.video_lectures:
-                        fragment=new VideoLecturesFragment();
+                        fragment = new VideoLecturesFragment();
                         loadFragment(fragment);
 
                         break;
                     case R.id.question_papers:
-                        fragment=new QuestionPaperFragment();
+                        fragment = new QuestionPaperFragment();
                         loadFragment(fragment);
-
                         break;
                     case R.id.setting:
                         Intent i = new Intent(getApplicationContext(), SettingActivity.class);
                         startActivity(i);
-
                         break;
-                    case R.id.logout:
-
-
-
-                        FirebaseAuth.getInstance().signOut();
-                        Toast.makeText(getApplicationContext(),"You are Logged Out",Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getApplicationContext(),"time spent is "+s,Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(getApplicationContext(), LoginDecisionActivity.class);
-                        startActivity(intent);
-
-
-                        break;
-                        
 
                     default:
                         return true;
@@ -153,17 +179,34 @@ public class MainActivity extends AppCompatActivity{
         CircleImageView userProfileImage = (CircleImageView) hView.findViewById(R.id.image_usr);
 
 
+        //for logout btn
+        navigationView.getMenu().findItem(R.id.logout).setOnMenuItemClickListener(menuItem -> {
+            mHandler.sendEmptyMessage(MSG_STOP_TIMER);
+            logout();
+            return true;
+        });
+
+
+    }
+
+    private void logout() {
+
+
+        FirebaseAuth.getInstance().signOut();
+        //Toast.makeText(getApplicationContext(),"You are Logged Out",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"Time Spent is "+(timer.getElapsedTime()/1000)+" seconds ",Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(), LoginDecisionActivity.class);
+        startActivity(intent);
+
+
 
     }
 
 
-
-
-
     private void loadFragment(Fragment fragment) {
-        FragmentManager fragmentManager=getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame,fragment).commit();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame, fragment).commit();
         drawerLayout.closeDrawer(GravityCompat.START);
         fragmentTransaction.addToBackStack(null);
 
@@ -171,13 +214,12 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
-
     //for toolbar options
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu,menu);
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
 
         MenuItem menuItem = menu.findItem(R.id.toolBar_profile_icon);
         View view = MenuItemCompat.getActionView(menuItem);
@@ -190,14 +232,21 @@ public class MainActivity extends AppCompatActivity{
         toolbarProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),ProfileActivity.class);
+                Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
                 startActivity(i);
             }
         });
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mHandler.sendEmptyMessage(MSG_START_TIMER);
+    }
+
 
 
 
 }
+

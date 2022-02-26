@@ -11,14 +11,14 @@
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/college_logo"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/app_logo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".35"
+        app:layout_constraintHeight_percent=".6"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent=".85" />
+        app:layout_constraintWidth_percent="1" />
 
     <TextView
         android:id="@+id/textView4"
