@@ -63,11 +63,10 @@ public class MainActivity extends AppCompatActivity{
     Toolbar toolbar;
     NavigationView navigationView;
     String s;
-    Temporal st,ed;
+    Temporal ed;
+    String st;
     Calendar calendar;
     SimpleDateFormat simpleDateFormat;
-
-
 
 
 
@@ -127,26 +126,7 @@ public class MainActivity extends AppCompatActivity{
                         break;
                     case R.id.logout:
 
-                        ed = simpleDateFormat.format(calendar.getTime()).toString();
 
-                        // Parsing Time Period in the format HH:MM:SS
-                        LocalTime time1 = LocalTime.of(st);
-                        LocalTime time2 = LocalTime.of(ed);
-
-                        // Calculating the difference in Hours
-                        long hours = ChronoUnit.HOURS.between(st, ed);
-                        String hr = String.valueOf(hours);
-
-                        // Calculating the difference in Minutes
-                        long minutes = ChronoUnit.MINUTES.between(time1, time2) % 60;
-                        String mr = String.valueOf(hours);
-
-                        // Calculating the difference in Seconds
-                        long seconds = ChronoUnit.SECONDS.between(time1, time2) % 60;
-                        String sr = String.valueOf(hours);
-
-                        // Printing the difference
-                        s = hr + " hours " + mr + " minutes " + sr + " seconds.";
 
                         FirebaseAuth.getInstance().signOut();
                         Toast.makeText(getApplicationContext(),"You are Logged Out",Toast.LENGTH_SHORT).show();
