@@ -37,7 +37,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -48,7 +47,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 import com.yashovardhan99.timeit.Stopwatch;
-
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -74,48 +72,12 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     NavigationView navigationView;
 
-
-
-
     final int MSG_START_TIMER = 0;
     final int MSG_STOP_TIMER = 1;
     final int MSG_UPDATE_TIMER = 2;
 
     Stopwatch timer = new Stopwatch();
     final int REFRESH_RATE = 100;
-
-    @SuppressLint("HandlerLeak")
-    Handler mHandler = new Handler()
-    {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case MSG_START_TIMER:
-                    timer.start(); //start timer
-                    mHandler.sendEmptyMessage(MSG_UPDATE_TIMER);
-                    break;
-
-                case MSG_UPDATE_TIMER:
-
-                    mHandler.sendEmptyMessageDelayed(MSG_UPDATE_TIMER,REFRESH_RATE); //text view is updated every second,
-                    break;                                  //though the timer is still running
-                case MSG_STOP_TIMER:
-                    mHandler.removeMessages(MSG_UPDATE_TIMER); // no more updates.
-                    timer.stop();//stop timer
-                    break;
-
-                default:
-                    break;
-            }
-        }
-    };
-
-
-
-
-
-
 
 
     @Override
@@ -190,16 +152,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logout() {
-
-
         FirebaseAuth.getInstance().signOut();
         //Toast.makeText(getApplicationContext(),"You are Logged Out",Toast.LENGTH_SHORT).show();
         Toast.makeText(getApplicationContext(),"Time Spent is "+(timer.getElapsedTime()/1000)+" seconds ",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getApplicationContext(), LoginDecisionActivity.class);
         startActivity(intent);
-
-
-
     }
 
 
@@ -209,12 +166,9 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frame, fragment).commit();
         drawerLayout.closeDrawer(GravityCompat.START);
         fragmentTransaction.addToBackStack(null);
-
-
     }
 
 
-    //for toolbar options
 
 
     @Override
@@ -245,8 +199,31 @@ public class MainActivity extends AppCompatActivity {
         mHandler.sendEmptyMessage(MSG_START_TIMER);
     }
 
+    @SuppressLint("HandlerLeak")
+    Handler mHandler = new Handler()
+    {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case MSG_START_TIMER:
+                    timer.start(); //start timer
+                    mHandler.sendEmptyMessage(MSG_UPDATE_TIMER);
+                    break;
 
+                case MSG_UPDATE_TIMER:
 
+                    mHandler.sendEmptyMessageDelayed(MSG_UPDATE_TIMER,REFRESH_RATE); //text view is updated every second,
+                    break;                                                           //though the timer is still running
+                case MSG_STOP_TIMER:
+                    mHandler.removeMessages(MSG_UPDATE_TIMER); // no more updates.
+                    timer.stop();//stop timer
+                    break;
 
+                default:
+                    break;
+            }
+        }
+    };
 }
 
