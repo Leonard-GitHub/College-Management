@@ -35,11 +35,23 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
+import com.yashovardhan99.timeit.Stopwatch;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -50,13 +62,26 @@ public class MainActivity extends AppCompatActivity{
     ActionBarDrawerToggle toggle;
     Toolbar toolbar;
     NavigationView navigationView;
+    String s;
+    Temporal st,ed;
+    Calendar calendar;
+    SimpleDateFormat simpleDateFormat;
+
+
+
 
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        calendar = Calendar.getInstance();
+        simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+        st = simpleDateFormat.format(calendar.getTime());
+
+
 
         drawerLayout=findViewById(R.id.drawer);
         toolbar=findViewById(R.id.toolBar);
@@ -66,6 +91,7 @@ public class MainActivity extends AppCompatActivity{
         toggle.syncState();
         navigationView=findViewById(R.id.nav_view);
         loadFragment(new HomeFragment());
+
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -100,13 +126,35 @@ public class MainActivity extends AppCompatActivity{
 
                         break;
                     case R.id.logout:
-                        fragment=new LogoutFragment();
-                        loadFragment(fragment);
 
-                        break;
-                    case R.id.about:
-                        fragment=new AboutFragment();
-                        loadFragment(fragment);
+                        ed = simpleDateFormat.format(calendar.getTime()).toString();
+
+                        // Parsing Time Period in the format HH:MM:SS
+                        LocalTime time1 = LocalTime.of(st);
+                        LocalTime time2 = LocalTime.of(ed);
+
+                        // Calculating the difference in Hours
+                        long hours = ChronoUnit.HOURS.between(st, ed);
+                        String hr = String.valueOf(hours);
+
+                        // Calculating the difference in Minutes
+                        long minutes = ChronoUnit.MINUTES.between(time1, time2) % 60;
+                        String mr = String.valueOf(hours);
+
+                        // Calculating the difference in Seconds
+                        long seconds = ChronoUnit.SECONDS.between(time1, time2) % 60;
+                        String sr = String.valueOf(hours);
+
+                        // Printing the difference
+                        s = hr + " hours " + mr + " minutes " + sr + " seconds.";
+
+                        FirebaseAuth.getInstance().signOut();
+                        Toast.makeText(getApplicationContext(),"You are Logged Out",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"time spent is "+s,Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getApplicationContext(), LoginDecisionActivity.class);
+                        startActivity(intent);
+
+
                         break;
                         
 
@@ -127,6 +175,9 @@ public class MainActivity extends AppCompatActivity{
 
 
     }
+
+
+
 
 
     private void loadFragment(Fragment fragment) {
@@ -165,4 +216,8 @@ public class MainActivity extends AppCompatActivity{
         });
         return super.onCreateOptionsMenu(menu);
     }
+
+
+
+
 }
