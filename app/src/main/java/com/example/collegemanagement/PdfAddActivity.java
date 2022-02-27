@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -123,7 +124,7 @@ public class PdfAddActivity extends AppCompatActivity {
         long timeStamp = System.currentTimeMillis();
 
         String filePathAndName= "Pdfs/"+timeStamp;
-        StorageReference storageReference = FirebaseDatabase.getInstance().getReference(filePathAndName);
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathAndName);
         storageReference.putFile(pdfUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -214,7 +215,7 @@ public class PdfAddActivity extends AppCompatActivity {
     private void subjectPickDialog() {
         Log.d(TAG, "subjectPickDialog: showing category pick dialog");
         String[] subjectArray=new String[subjectArrayList.size()];
-        for(int i=0; i<subjectArray.size(); i++){
+        for(int i=0; i<subjectArrayList.size(); i++){
             subjectArray[i]= subjectArrayList.get(i).getSubject();
         }
         AlertDialog.Builder builder= new AlertDialog.Builder(this);
