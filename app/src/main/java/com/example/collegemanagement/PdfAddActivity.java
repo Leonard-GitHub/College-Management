@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.collegemanagement.databinding.ActivityPdfAddBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +29,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PdfAddActivity extends AppCompatActivity {
 
@@ -126,15 +128,60 @@ public class PdfAddActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Toast.makeText(PdfAddActivity.this, "Pdf Uploaded", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "onSuccess: Getting Pdf Url");
+                        Task<Uri> uriTask= taskSnapshot.getStorage().getDownloadUrl();
+                        while (!uriTask.isSuccessful());
+                        String uploadedPdfUrl = ""+uriTask.getResult();
 
+                        uploadPdfInfoToDb(uploadedPdfUrl, timeStamp);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        progressDialog.dismiss();
                         Log.d(TAG, "onFailure: Failed to Upload due to "+e.getMessage());
+                        Toast.makeText(PdfAddActivity.this, "Pdf upload failed due to "+e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                })
+                });
+
+    }
+
+    private void uploadPdfInfoToDb(String uploadedPdfUrl, long timeStamp) {
+        Log.d(TAG, "uploadPdfInfoToDb: Uploading data to storage");
+        progressDialog.setMessage("Uploading Pdf Info");
+        String uid = firebaseAuth.getUid();
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("uid", ""+uid);
+        hashMap.put("id", ""+timeStamp);
+        hashMap.put("title", ""+title);
+        hashMap.put("Description", ""+description);
+        hashMap.put("Url", ""+uploadedPdfUrl);
+        hashMap.put("Time Stamp", timeStamp);
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Pdfs");
+        ref.child(""+timeStamp)
+                .setValue(hashMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        progressDialog.dismiss();
+                        Log.d(TAG, "onSuccess: Sucessfully Uploaded");
+                        Toast.makeText(PdfAddActivity.this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progressDialog.dismiss();
+                Log.d(TAG, "onFailure: Failed to Upload due to "+e.getMessage());
+                Toast.makeText(PdfAddActivity.this, "Failed to Upload due to "+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
 
     }
 
