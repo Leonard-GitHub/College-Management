@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -49,6 +50,7 @@ public class AdminViewQuestionPaperFragment extends Fragment {
     RecyclerView subjectsRv;
     EditText searchbar;
     Button addSubjectBtn;
+    FloatingActionButton addPdfFab;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,14 @@ public class AdminViewQuestionPaperFragment extends Fragment {
         addSubjectBtn = view.findViewById(R.id.addSubjectBtn);
         subjectsRv = view.findViewById(R.id.subjectsRv);
         searchbar = view.findViewById(R.id.searchEt);
+        addPdfFab = view.findViewById(R.id.addPdfFab);
+        addPdfFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), PdfAddActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         addSubjectBtn.setOnClickListener(new View.OnClickListener() {

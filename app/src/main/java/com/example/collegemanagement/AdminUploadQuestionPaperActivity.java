@@ -169,7 +169,7 @@ public class AdminUploadQuestionPaperActivity extends AppCompatActivity {
 
         //add to firebase db..........Database Root>Categories>categoryID>categray info
         DatabaseReference ref   = FirebaseDatabase.getInstance().getReference("Subjects");
-        ref.child(""+timestamp)
+        ref.child(""+sujbect)
                 .setValue(hashMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

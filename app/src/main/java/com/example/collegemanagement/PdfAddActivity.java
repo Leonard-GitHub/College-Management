@@ -27,6 +27,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -42,6 +43,8 @@ public class PdfAddActivity extends AppCompatActivity {
     private static final String TAG = "ADD_PDF_TAG";
     private Uri pdfUri=null;
 
+    TextView categoryTV;
+
 
 
     @Override
@@ -56,15 +59,11 @@ public class PdfAddActivity extends AppCompatActivity {
         progressDialog=new ProgressDialog(this);
         progressDialog.setTitle("Please Wait...");
         progressDialog.setCanceledOnTouchOutside(false);
+        categoryTV = findViewById(R.id.categoryTv);
 
 
 
-        binding.backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+
         binding.attachBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -161,8 +160,8 @@ public class PdfAddActivity extends AppCompatActivity {
         hashMap.put("Url", ""+uploadedPdfUrl);
         hashMap.put("Time Stamp", timeStamp);
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Pdfs");
-        ref.child(""+timeStamp)
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Subjects/"+subject+"/"+"Question Paper");
+        ref.child(""+title)
                 .setValue(hashMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -228,7 +227,7 @@ public class PdfAddActivity extends AppCompatActivity {
 
                         Log.d(TAG, "onClick: Selected Subject "+ subject);
                     }
-                });
+                }).show();
     }
 
 
