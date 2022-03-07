@@ -8,9 +8,13 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:name=".MyApplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CollegeManagement">
+        <activity
+            android:name=".PdfListAdminActivity"
+            android:exported="false" />
         <activity
             android:name=".AdminUploadQuestionPaperActivity"
             android:exported="false" />

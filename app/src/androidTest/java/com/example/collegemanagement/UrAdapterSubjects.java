@@ -8,6 +8,10 @@ import android.widget.Filterable;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.collegemanagement.adapters.AdapterSubjects;
+import com.example.collegemanagement.filters.FilterSubjects;
+import com.example.collegemanagement.models.ModelSubject;
+
 import java.util.ArrayList;
 
 public class UrAdapterSubjects extends RecyclerView.Adapter<AdapterSubjects.HolderSubjects> implements Filterable {
