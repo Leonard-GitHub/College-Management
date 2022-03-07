@@ -2,11 +2,10 @@ package com.example.collegemanagement;
 
 import android.widget.Filter;
 
-import com.example.collegemanagement.AdapterSubjects;
-import com.example.collegemanagement.ModelSubject;
+import com.example.collegemanagement.adapters.AdapterSubjects;
+import com.example.collegemanagement.models.ModelSubject;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class FilterSubjects extends Filter {
 
