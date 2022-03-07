@@ -44,6 +44,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 import com.yashovardhan99.timeit.Stopwatch;
@@ -79,11 +80,18 @@ public class MainActivity extends AppCompatActivity {
     Stopwatch timer = new Stopwatch();
     final int REFRESH_RATE = 100;
 
+    private FirebaseAuth firebaseAuth;
+
+    TextView email, name;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+
 
 
         drawerLayout = findViewById(R.id.drawer);
@@ -93,7 +101,31 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView = findViewById(R.id.nav_view);
+
+
+        View header = navigationView.getHeaderView(0);
+        email = (TextView) header.findViewById(R.id.main_email);
+        name =  (TextView) header.findViewById(R.id.main_name);
+        CircleImageView userProfileImage = (CircleImageView) header.findViewById(R.id.image_usr);
+
+
         loadFragment(new HomeFragment());
+
+
+
+        //for usr profile and name
+        //get current user
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        if(firebaseUser==null){
+            Intent intent = new Intent(getApplicationContext(), LoginDecisionActivity.class);
+            startActivity(intent);
+        }else{
+            //get user info
+            String emailString = firebaseUser.getEmail();
+            String nameString = firebaseUser.getDisplayName();
+            email.setText(emailString);
+            name.setText(nameString);
+        }
 
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -138,11 +170,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //for usr profile and name
-        View hView = navigationView.getHeaderView(0);
-        TextView email = (TextView) hView.findViewById(R.id.main_email);
-        TextView name = (TextView) hView.findViewById(R.id.main_name);
-        CircleImageView userProfileImage = (CircleImageView) hView.findViewById(R.id.image_usr);
+
+
 
 
         //for logout btn
@@ -154,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 
     private void logout() {
         FirebaseAuth.getInstance().signOut();
@@ -220,8 +250,8 @@ public class MainActivity extends AppCompatActivity {
                     mHandler.sendEmptyMessageDelayed(MSG_UPDATE_TIMER,REFRESH_RATE); //text view is updated every second,
                     break;                                                           //though the timer is still running
                 case MSG_STOP_TIMER:
-                    mHandler.removeMessages(MSG_UPDATE_TIMER); // no more updates.
-                    timer.stop();//stop timer
+                    mHandler.removeMessages(MSG_UPDATE_TIMER);                      // no more updates.
+                    timer.stop();                                                   //stop timer
                     break;
 
                 default:
