@@ -252,7 +252,7 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String subject=""+snapshot.child("subject").getValue();
+                        String subject=""+snapshot.child("Subject").getValue();
                         holder.subjectTV.setText(subject);
                     }
 

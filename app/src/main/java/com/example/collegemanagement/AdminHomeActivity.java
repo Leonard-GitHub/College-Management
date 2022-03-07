@@ -33,7 +33,7 @@ public class AdminHomeActivity extends AppCompatActivity {
                         replace(new AdminViewQuestionPaperFragment());
                         break;
 
-                    case 3:
+                    case 1:
                         replace(new AdminSettingkFragment());
                         break;
                 }
