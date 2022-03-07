@@ -153,7 +153,7 @@ public class PdfAddActivity extends AppCompatActivity {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("uid", ""+uid);
         hashMap.put("id", ""+timeStamp);
-        hashMap.put("title", ""+title);
+        hashMap.put("title", ""+selectedSubjectTitle);
         hashMap.put("Description", ""+description);
         hashMap.put("SubjectId",""+selectedSubjectId);
         hashMap.put("Url", ""+uploadedPdfUrl);
@@ -211,7 +211,7 @@ public class PdfAddActivity extends AppCompatActivity {
         });
 
 
-    }//chutiya_leo
+    }
 
     private String selectedSubjectId, selectedSubjectTitle;
     private void subjectPickDialog() {
