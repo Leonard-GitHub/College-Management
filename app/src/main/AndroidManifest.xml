@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CollegeManagement">
         <activity
+            android:name=".PdfListAdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".AdminUploadQuestionPaperActivity"
             android:exported="false" />
         <activity

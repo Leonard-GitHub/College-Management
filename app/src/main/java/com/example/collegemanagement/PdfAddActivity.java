@@ -26,7 +26,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +37,7 @@ public class PdfAddActivity extends AppCompatActivity {
     private ActivityPdfAddBinding binding;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
-    private ArrayList<ModelSubject> subjectArrayList;
+    private ArrayList<String> subjectTitleArrayList, subjectIDArrayList;
     private static final int PDF_PICK_CODE = 1000;
     private static final String TAG = "ADD_PDF_TAG";
     private Uri pdfUri=null;
@@ -88,14 +87,13 @@ public class PdfAddActivity extends AppCompatActivity {
 
     }
 
-    private String title="", description="", subject="";
+    private String title="", description="";
     private void validateData() {
 
         Log.d(TAG, "validateData: Validating Data");
 
         title=binding.titleEt.getText().toString().trim();
         description=binding.descriptionEt.getText().toString().trim();
-        subject=binding.categoryTv.getText().toString().trim();
 
         if(TextUtils.isEmpty(title)){
             Toast.makeText(this, "Enter Title.......", Toast.LENGTH_SHORT).show();
@@ -103,7 +101,7 @@ public class PdfAddActivity extends AppCompatActivity {
         else if(TextUtils.isEmpty(description)){
             Toast.makeText(this, "Enter Description.....", Toast.LENGTH_SHORT).show();
         }
-        else if(TextUtils.isEmpty(subject)){
+        else if(TextUtils.isEmpty(selectedSubjectTitle)){
             Toast.makeText(this, "Enter Subject.....", Toast.LENGTH_SHORT).show();
         }
         else if(pdfUri==null){
@@ -157,10 +155,11 @@ public class PdfAddActivity extends AppCompatActivity {
         hashMap.put("id", ""+timeStamp);
         hashMap.put("title", ""+title);
         hashMap.put("Description", ""+description);
+        hashMap.put("SubjectId",""+selectedSubjectId);
         hashMap.put("Url", ""+uploadedPdfUrl);
         hashMap.put("Time Stamp", timeStamp);
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Subjects/"+subject+"/"+"Question Paper");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Subjects/"+selectedSubjectTitle+"/"+"Question Paper");
         ref.child(""+title)
                 .setValue(hashMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -187,18 +186,21 @@ public class PdfAddActivity extends AppCompatActivity {
 
     private void loadPdfCategories() {
         Log.d(TAG, "loadPdfCategories: loading pdf categories");
-        subjectArrayList=new ArrayList<>();
+        subjectTitleArrayList =new ArrayList<>();
+        subjectIDArrayList= new ArrayList<>();
 
         DatabaseReference ref= FirebaseDatabase.getInstance().getReference("Subjects");
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                subjectArrayList.clear();
+                subjectTitleArrayList.clear();
+                subjectIDArrayList.clear();
                 for(DataSnapshot ds: snapshot.getChildren()){
-                    ModelSubject model= ds.getValue(ModelSubject.class);
-                    subjectArrayList.add(model);
+                    String subjectId=""+ds.child("id").getValue();
+                    String subjectTitle=""+ds.child("subject").getValue();
 
-                    Log.d(TAG, "onDataChange: "+model.getSubject());
+                    subjectIDArrayList.add(subjectId);
+                    subjectTitleArrayList.add(subjectTitle);
                 }
             }
 
@@ -211,21 +213,23 @@ public class PdfAddActivity extends AppCompatActivity {
 
     }
 
+    private String selectedSubjectId, selectedSubjectTitle;
     private void subjectPickDialog() {
         Log.d(TAG, "subjectPickDialog: showing category pick dialog");
-        String[] subjectArray=new String[subjectArrayList.size()];
-        for(int i=0; i<subjectArrayList.size(); i++){
-            subjectArray[i]= subjectArrayList.get(i).getSubject();
+        String[] subjectArray=new String[subjectTitleArrayList.size()];
+        for(int i = 0; i< subjectTitleArrayList.size(); i++){
+            subjectArray[i]= subjectTitleArrayList.get(i);
         }
         AlertDialog.Builder builder= new AlertDialog.Builder(this);
         builder.setTitle("Pick Subject")
                 .setItems(subjectArray, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
-                        String subject = subjectArray[which];
-                        binding.categoryTv.setText(subject);
+                        selectedSubjectTitle = subjectTitleArrayList.get(which);
+                        selectedSubjectId = subjectIDArrayList.get(which);
+                        binding.categoryTv.setText(selectedSubjectTitle);
 
-                        Log.d(TAG, "onClick: Selected Subject "+ subject);
+                        Log.d(TAG, "onClick: Selected Subject "+ selectedSubjectId+ " "+selectedSubjectTitle);
                     }
                 }).show();
     }
