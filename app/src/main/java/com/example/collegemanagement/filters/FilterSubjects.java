@@ -1,4 +1,4 @@
-package com.example.collegemanagement;
+package com.example.collegemanagement.filters;
 
 import android.widget.Filter;
 
