@@ -40,6 +40,5 @@
             android:title="Logout"
             android:icon="@drawable/logout_96_newpx"
             android:id="@+id/logout"/>
-
     </group>
 </menu>

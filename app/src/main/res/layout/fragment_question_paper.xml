@@ -29,10 +29,10 @@
         android:layout_margin="5dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ursearchEt"
         tools:listitem="@layout/row_subjects" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

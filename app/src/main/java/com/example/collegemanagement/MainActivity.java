@@ -121,6 +121,10 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new QuestionPaperFragment();
                         loadFragment(fragment);
                         break;
+                    case R.id.about:
+                        fragment = new AboutFragment();
+                        loadFragment(fragment);
+                        break;
                     case R.id.setting:
                         Intent i = new Intent(getApplicationContext(), SettingActivity.class);
                         startActivity(i);
