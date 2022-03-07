@@ -2,7 +2,9 @@ package com.example.collegemanagement.adapters;
 
 import static com.example.collegemanagement.Constants.MAX_BYTES_PDF;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.collegemanagement.MyApplication;
@@ -49,11 +52,17 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
     private ActivityRowPdfAdminBinding binding;
     private FilterPdfAdmin filter;
     private static final String TAG="PDF_ADAPTER_TAG";
+    private ProgressDialog progressDialog;
 
     public AdapterPdfAdmin(Context context, ArrayList<Modelpdf> pdfArrayList) {
         this.context = context;
         this.pdfArrayList = pdfArrayList;
         this.filterList = pdfArrayList;
+
+        progressDialog=new ProgressDialog(context);
+        progressDialog.setTitle("Please Wait");
+        progressDialog.setCanceledOnTouchOutside(false);
+
     }
 
 
@@ -80,6 +89,78 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
         loadSubject(model, holder);
         loadPdfFromUrl(model, holder);
         loadPdfSize(model, holder);
+
+        holder.moreBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                moreOptionsDialog(model, holder);
+            }
+
+
+        });
+
+    }
+
+    private void moreOptionsDialog(Modelpdf model, HolderPdfAdmin holder) {
+        String[] options={"Delete"};
+        AlertDialog.Builder builder=new AlertDialog.Builder(context);
+        builder.setTitle("Choose")
+                .setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        if(which==0){
+
+                        }
+                        else if(which==1){
+                            deleteBook(model, builder);
+                        }
+                    }
+                }).show();
+    }
+
+    private void deleteBook(Modelpdf model, AlertDialog.Builder builder) {
+        String bookId= model.getId();
+        String bookUrl= model.getUrl();
+        String bookTitle= model.getTitle();
+
+        Log.d(TAG, "deleteBook: Deleting.....");
+        progressDialog.setMessage("Deleteing  "+bookTitle+"....");
+        progressDialog.show();
+
+        Log.d(TAG, "deleteBook: Deleting from storage");
+        StorageReference storageReference=FirebaseStorage.getInstance().getReferenceFromUrl(bookUrl);
+        storageReference.delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d(TAG, "onSuccess: Deleted from Storage");
+                        Log.d(TAG, "onSuccess: Now deleting from Database");
+                        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("Books");
+                        reference.child(bookId)
+                                .removeValue()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Log.d(TAG, "onSuccess: Deleted from DB too");
+                                        progressDialog.dismiss();
+                                        Toast.makeText(context, "Book deleted successfully", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.d(TAG, "onFailure: Failed to delete from Database due to"+e.getMessage());
+                                progressDialog.dismiss();
+                                Toast.makeText(context, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, "onFailure: Failed to delete from storage due to "+e.getMessage());
+                progressDialog.dismiss();
+            }
+        });
 
     }
 
