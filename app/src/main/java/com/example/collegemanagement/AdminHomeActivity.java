@@ -33,14 +33,6 @@ public class AdminHomeActivity extends AppCompatActivity {
                         replace(new AdminViewQuestionPaperFragment());
                         break;
 
-                    case 1:
-                        replace(new UploadVideoLecturesFragment());
-                        break;
-
-                    case 2:
-                        replace(new UploadNotesFragment());
-                        break;
-
                     case 3:
                         replace(new AdminSettingkFragment());
                         break;

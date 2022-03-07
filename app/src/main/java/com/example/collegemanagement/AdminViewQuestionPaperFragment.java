@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.example.collegemanagement.adapters.AdapterSubjects;
 import com.example.collegemanagement.models.ModelSubject;
@@ -36,6 +37,7 @@ public class AdminViewQuestionPaperFragment extends Fragment {
     EditText searchbar;
     Button addSubjectBtn;
     FloatingActionButton addPdfFab;
+    ProgressBar progressBar;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class AdminViewQuestionPaperFragment extends Fragment {
         View view = (ViewGroup) inflater.inflate(R.layout.fragment_admin_view_question_paper, container, false);
 
 
+        progressBar = view.findViewById(R.id.progressBar3);
         addSubjectBtn = view.findViewById(R.id.addSubjectBtn);
         subjectsRv = view.findViewById(R.id.subjectsRv);
         searchbar = view.findViewById(R.id.searchEt);
@@ -116,6 +119,7 @@ public class AdminViewQuestionPaperFragment extends Fragment {
                     ModelSubject model = ds.getValue(ModelSubject.class);
                     subjectArrayList.add(model);
                 }
+                progressBar.setVisibility(View.GONE);
                 adapterSubjects = new AdapterSubjects(getContext(), subjectArrayList);
                 subjectsRv.setAdapter(adapterSubjects);
 

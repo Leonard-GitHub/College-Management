@@ -85,6 +85,7 @@ dependencies {
 
     //PDF VIEWER
     implementation 'com.github.afreakyelf:Pdf-Viewer:v1.0.7'
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 
     //Timmer
     implementation 'com.github.yashovardhan99:TimeIt:1.2.0'

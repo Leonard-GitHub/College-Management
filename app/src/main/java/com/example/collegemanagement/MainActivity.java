@@ -169,16 +169,6 @@ public class MainActivity extends AppCompatActivity {
                         loadFragment(fragment);
 
                         break;
-                    case R.id.notes:
-                        fragment = new NotesFragment();
-                        loadFragment(fragment);
-
-                        break;
-                    case R.id.video_lectures:
-                        fragment = new VideoLecturesFragment();
-                        loadFragment(fragment);
-
-                        break;
                     case R.id.question_papers:
                         fragment = new QuestionPaperFragment();
                         loadFragment(fragment);

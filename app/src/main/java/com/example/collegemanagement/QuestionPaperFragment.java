@@ -34,6 +34,7 @@ public class QuestionPaperFragment extends Fragment {
     EditText searchbar;
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -43,6 +44,7 @@ public class QuestionPaperFragment extends Fragment {
 
         subjectsRv = v.findViewById(R.id.ursubjectsRv);
         searchbar = v.findViewById(R.id.ursearchEt);
+
 
 
 

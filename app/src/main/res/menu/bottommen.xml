@@ -2,16 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/adminhome"
-        android:title="Question Paper"
+        android:title="Study Material"
         android:icon="@drawable/stack_of_paper_96px" />
 
-    <item android:id="@+id/adminsearch"
-        android:title="Video Lectures"
-        android:icon="@drawable/video_playlist_90px" />
-
-    <item android:id="@+id/adminprofile"
-        android:title="Notes"
-        android:icon="@drawable/notes" />
 
     <item android:id="@+id/adminsetting"
         android:title="Profile"

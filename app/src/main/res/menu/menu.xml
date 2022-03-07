@@ -9,18 +9,9 @@
             android:icon="@drawable/home_96px"
             android:id="@+id/home"
             />
+
         <item
-            android:title="Notes"
-            android:icon="@drawable/notes"
-            android:id="@+id/notes"
-            />
-        <item
-            android:title="Video Lectures"
-            android:icon="@drawable/video_playlist_90px"
-            android:id="@+id/video_lectures"
-            />
-        <item
-            android:title="Question Papers"
+            android:title="Study Material"
             android:icon="@drawable/stack_of_paper_96px"
             android:id="@+id/question_papers"
             />

@@ -26,7 +26,10 @@ import com.example.collegemanagement.MyApplication;
 import com.example.collegemanagement.databinding.ActivityRowPdfAdminBinding;
 import com.example.collegemanagement.filters.FilterPdfAdmin;
 import com.example.collegemanagement.models.Modelpdf;
-
+import com.github.barteksc.pdfviewer.PDFView;
+import com.github.barteksc.pdfviewer.listener.OnErrorListener;
+import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
+import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
