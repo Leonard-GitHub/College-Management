@@ -2,9 +2,8 @@ package com.example.collegemanagement.models;
 
 public class ModelSubject {
 
-
-String id, Subject, imageurl, uid;
-long timestamp;
+    String id, Subject, imageurl, uid;
+    long timestamp;
 
     public ModelSubject() {
     }
@@ -16,6 +15,7 @@ long timestamp;
         this.uid = uid;
         this.timestamp = timestamp;
     }
+
 
     public String getId() {
         return id;

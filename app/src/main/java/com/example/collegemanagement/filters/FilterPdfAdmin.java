@@ -3,8 +3,6 @@ package com.example.collegemanagement.filters;
 import android.widget.Filter;
 
 import com.example.collegemanagement.adapters.AdapterPdfAdmin;
-import com.example.collegemanagement.adapters.AdapterSubjects;
-import com.example.collegemanagement.models.ModelSubject;
 import com.example.collegemanagement.models.Modelpdf;
 
 import java.util.ArrayList;

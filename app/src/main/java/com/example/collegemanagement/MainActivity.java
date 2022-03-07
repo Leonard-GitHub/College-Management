@@ -1,9 +1,12 @@
 package com.example.collegemanagement;
 
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +22,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -41,10 +45,20 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 import com.yashovardhan99.timeit.Stopwatch;
@@ -81,8 +95,13 @@ public class MainActivity extends AppCompatActivity {
     final int REFRESH_RATE = 100;
 
     private FirebaseAuth firebaseAuth;
+    FirebaseFirestore db ;
 
+
+    CircleImageView userProfileImage;
     TextView email, name;
+    String usrProfile, uid;
+
 
 
     @Override
@@ -104,9 +123,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         View header = navigationView.getHeaderView(0);
-        email = (TextView) header.findViewById(R.id.main_email);
-        name =  (TextView) header.findViewById(R.id.main_name);
-        CircleImageView userProfileImage = (CircleImageView) header.findViewById(R.id.image_usr);
+        email =  header.findViewById(R.id.main_email);
+        name =  header.findViewById(R.id.main_name);
+        userProfileImage =  header.findViewById(R.id.imaage_usr);
 
 
         loadFragment(new HomeFragment());
@@ -121,11 +140,22 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }else{
             //get user info
+            uid = firebaseUser.getUid();
             String emailString = firebaseUser.getEmail();
-            String nameString = firebaseUser.getDisplayName();
             email.setText(emailString);
-            name.setText(nameString);
+            Glide.with(this).load(usrProfile).into(userProfileImage);
         }
+        db = FirebaseFirestore.getInstance();
+        DocumentReference documentReference = db.collection("Users").document(uid);
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                name.setText(value.getString("Username"));
+                usrProfile = (value.getString("UserProfile"));
+            }
+        });
+
+
 
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

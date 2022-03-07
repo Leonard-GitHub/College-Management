@@ -20,8 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.collegemanagement.filters.FilterSubjects;
 import com.example.collegemanagement.PdfListAdminActivity;
-import com.example.collegemanagement.models.ModelSubject;
 import com.example.collegemanagement.R;
+import com.example.collegemanagement.models.ModelSubject;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -138,7 +138,7 @@ public class AdapterSubjects extends RecyclerView.Adapter<AdapterSubjects.Holder
     }
 
 
-    class HolderSubjects extends RecyclerView.ViewHolder{
+    public class HolderSubjects extends RecyclerView.ViewHolder{
 
         TextView subjectTV;
         ImageButton subjectIB;

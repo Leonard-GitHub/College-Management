@@ -186,14 +186,5 @@ public class AdminUploadQuestionPaperActivity extends AppCompatActivity {
 
 
         });
-
-
-
-
-
-
-
-
-
     }
 }

@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.collegemanagement.databinding.ActivityPdfAddBinding;
+import com.example.collegemanagement.models.ModelSubject;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -37,6 +38,7 @@ public class PdfAddActivity extends AppCompatActivity {
     private ActivityPdfAddBinding binding;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
+    private ArrayList<ModelSubject> subjectArrayList;
     private ArrayList<String> subjectTitleArrayList, subjectIDArrayList;
     private static final int PDF_PICK_CODE = 1000;
     private static final String TAG = "ADD_PDF_TAG";
@@ -67,11 +69,10 @@ public class PdfAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 pdfPickIntent();
-                
             }
         });
 
-        binding.categoryTv.setOnClickListener(new View.OnClickListener() {
+        categoryTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 subjectPickDialog();
@@ -153,7 +154,7 @@ public class PdfAddActivity extends AppCompatActivity {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("uid", ""+uid);
         hashMap.put("id", ""+timeStamp);
-        hashMap.put("title", ""+title);
+        hashMap.put("title", ""+selectedSubjectTitle);
         hashMap.put("Description", ""+description);
         hashMap.put("SubjectId",""+selectedSubjectId);
         hashMap.put("Url", ""+uploadedPdfUrl);
@@ -197,7 +198,7 @@ public class PdfAddActivity extends AppCompatActivity {
                 subjectIDArrayList.clear();
                 for(DataSnapshot ds: snapshot.getChildren()){
                     String subjectId=""+ds.child("id").getValue();
-                    String subjectTitle=""+ds.child("subject").getValue();
+                    String subjectTitle=""+ds.child("Subject").getValue();
 
                     subjectIDArrayList.add(subjectId);
                     subjectTitleArrayList.add(subjectTitle);
@@ -211,7 +212,7 @@ public class PdfAddActivity extends AppCompatActivity {
         });
 
 
-    }//chutiya_leo
+    }
 
     private String selectedSubjectId, selectedSubjectTitle;
     private void subjectPickDialog() {
@@ -227,9 +228,8 @@ public class PdfAddActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int which) {
                         selectedSubjectTitle = subjectTitleArrayList.get(which);
                         selectedSubjectId = subjectIDArrayList.get(which);
-                        binding.categoryTv.setText(selectedSubjectTitle);
 
-                        Log.d(TAG, "onClick: Selected Subject "+ selectedSubjectId+ " "+selectedSubjectTitle);
+                        categoryTV.setText(selectedSubjectTitle);
                     }
                 }).show();
     }
