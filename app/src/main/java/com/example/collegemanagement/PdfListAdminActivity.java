@@ -27,7 +27,7 @@ public class PdfListAdminActivity extends AppCompatActivity {
     public ArrayList<Modelpdf> pdfArrayList;
     private AdapterPdfAdmin adapterPdfAdmin;
 
-    private String subjectId, subjectTitle;
+    public String subjectId, subjectTitle;
     private static final String TAG = "PDF_LIST_TAG";
 
     @Override

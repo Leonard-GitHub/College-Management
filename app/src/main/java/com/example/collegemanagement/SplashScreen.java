@@ -11,6 +11,7 @@ import android.view.WindowManager;
 public class SplashScreen extends AppCompatActivity {
 
     final String PREFS_NAME = "MyPrefsFile";
+    //hello world
 
 
     @Override

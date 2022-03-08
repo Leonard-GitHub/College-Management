@@ -26,6 +26,7 @@ import com.example.collegemanagement.MyApplication;
 import com.example.collegemanagement.databinding.ActivityRowPdfAdminBinding;
 import com.example.collegemanagement.filters.FilterPdfAdmin;
 import com.example.collegemanagement.models.Modelpdf;
+
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnErrorListener;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
@@ -135,7 +136,7 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
                     public void onSuccess(Void unused) {
                         Log.d(TAG, "onSuccess: Deleted from Storage");
                         Log.d(TAG, "onSuccess: Now deleting from Database");
-                        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("Books");
+                        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("Subjects/"+bookTitle+"/Question Paper");
                         reference.child(bookId)
                                 .removeValue()
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -247,7 +248,7 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
 
     private void loadSubject(Modelpdf model, HolderPdfAdmin holder) {
         String subjectId= model.getSubjectId();
-        DatabaseReference ref= FirebaseDatabase.getInstance().getReference("Subjects");
+        DatabaseReference ref= FirebaseDatabase.getInstance().getReference("Question Paper");
         ref.child(subjectId)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
