@@ -49,11 +49,11 @@
             style="@style/TextAppearance.MaterialComponents.Body2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Book Description"
-            android:layout_toEndOf="@id/pdfRl"
             android:layout_below="@id/titleTv"
+            android:layout_toEndOf="@id/pdfRl"
+            android:ellipsize="end"
             android:maxLines="4"
-            android:ellipsize="end"/>
+            android:text="Book Description" />
 
         <TextView
             android:id="@+id/subjectTV"

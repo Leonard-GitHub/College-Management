@@ -1,21 +1,20 @@
 package com.example.collegemanagement.models;
 
 public class Modelpdf {
-    String uid, id, title,description, subjectId, url;
-    long timeStamp;
+    String uid, id, title,Description, SubjectId, Url;
+    long TimeStamp;
 
     public Modelpdf() {
-
     }
 
     public Modelpdf(String uid, String id, String title, String description, String subjectId, String url, long timeStamp) {
         this.uid = uid;
         this.id = id;
         this.title = title;
-        this.description = description;
-        this.subjectId = subjectId;
-        this.url = url;
-        this.timeStamp = timeStamp;
+        Description = description;
+        SubjectId = subjectId;
+        Url = url;
+        TimeStamp = timeStamp;
     }
 
     public String getUid() {
@@ -43,35 +42,35 @@ public class Modelpdf {
     }
 
     public String getDescription() {
-        return description;
+        return Description;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        Description = description;
     }
 
     public String getSubjectId() {
-        return subjectId;
+        return SubjectId;
     }
 
     public void setSubjectId(String subjectId) {
-        this.subjectId = subjectId;
+        SubjectId = subjectId;
     }
 
     public String getUrl() {
-        return url;
+        return Url;
     }
 
     public void setUrl(String url) {
-        this.url = url;
+        Url = url;
     }
 
     public long getTimeStamp() {
-        return timeStamp;
+        return TimeStamp;
     }
 
     public void setTimeStamp(long timeStamp) {
-        this.timeStamp = timeStamp;
+        TimeStamp = timeStamp;
     }
 }
 
